@@ -1,0 +1,46 @@
+{
+  "title": "ScanSource Product Availability Check",
+  "description": "Example request and response for checking real-time inventory availability for multiple products",
+  "request": {
+    "method": "POST",
+    "url": "https://services.scansource.com/api/product/availability?customerNumber=CUST123456",
+    "headers": {
+      "Ocp-Apim-Subscription-Key": "{{SCANSOURCE_API_KEY}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "itemNumber": "SSC-ZD421-30",
+          "quantity": 5
+        },
+        {
+          "itemNumber": "HC-MK3100",
+          "quantity": 10
+        }
+      ],
+      "warehouse": "Greenville-SC"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "items": [
+        {
+          "itemNumber": "SSC-ZD421-30",
+          "manufacturerPartNumber": "ZD42143-D0E000EZ",
+          "quantityAvailable": 142,
+          "warehouse": "Greenville-SC",
+          "estimatedShipDate": "2026-05-03"
+        },
+        {
+          "itemNumber": "HC-MK3100",
+          "manufacturerPartNumber": "MK3100-B3D3G4110US",
+          "quantityAvailable": 0,
+          "warehouse": "Greenville-SC",
+          "estimatedShipDate": "2026-05-10"
+        }
+      ]
+    }
+  }
+}

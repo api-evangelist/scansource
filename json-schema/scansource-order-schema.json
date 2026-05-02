@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/api-evangelist/scansource/blob/main/json-schema/scansource-order-schema.json",
+  "title": "ScanSource Sales Order",
+  "description": "A sales order in the ScanSource technology distribution platform, representing a purchase transaction between a partner and ScanSource.",
+  "type": "object",
+  "properties": {
+    "salesOrderNumber": {
+      "type": "string",
+      "description": "ScanSource assigned sales order number"
+    },
+    "poNumber": {
+      "type": "string",
+      "description": "Customer purchase order number"
+    },
+    "customerNumber": {
+      "type": "string",
+      "description": "ScanSource customer account number"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current order status",
+      "enum": ["Pending", "Processing", "Shipped", "Delivered", "Cancelled", "OnHold"]
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time the order was placed"
+    },
+    "requestor": {
+      "type": "string",
+      "description": "Identifier of the person who placed the order"
+    },
+    "shipToAddress": {
+      "type": "object",
+      "description": "Shipping destination address",
+      "properties": {
+        "name": { "type": "string" },
+        "address1": { "type": "string" },
+        "address2": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "postalCode": { "type": "string" },
+        "country": { "type": "string", "default": "US" }
+      },
+      "required": ["address1", "city", "state", "postalCode"]
+    },
+    "shippingMethod": {
+      "type": "string",
+      "description": "Carrier and service level code"
+    },
+    "lineItems": {
+      "type": "array",
+      "description": "List of products ordered",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lineNumber": { "type": "integer" },
+          "itemNumber": { "type": "string" },
+          "manufacturerPartNumber": { "type": "string" },
+          "description": { "type": "string" },
+          "quantity": { "type": "integer", "minimum": 1 },
+          "unitPrice": { "type": "number" },
+          "extendedPrice": { "type": "number" },
+          "status": { "type": "string" }
+        },
+        "required": ["itemNumber", "quantity"]
+      }
+    },
+    "totalAmount": {
+      "type": "number",
+      "description": "Total order amount"
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD",
+      "description": "Currency code"
+    },
+    "tracking": {
+      "type": "array",
+      "description": "Carrier tracking information",
+      "items": {
+        "type": "object",
+        "properties": {
+          "trackingNumber": { "type": "string" },
+          "carrier": { "type": "string" },
+          "status": { "type": "string" },
+          "estimatedDelivery": { "type": "string", "format": "date" }
+        }
+      }
+    }
+  },
+  "required": ["poNumber", "lineItems"]
+}

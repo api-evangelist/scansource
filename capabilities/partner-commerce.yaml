@@ -1,0 +1,359 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ScanSource Partner Commerce"
+  description: "Unified capability for ScanSource technology distribution partners. Combines product catalog, pricing, availability, order management, tracking, and invoicing into a single partner commerce workflow. Used by partner ERP systems, sales tools, and customer self-service portals to automate the full purchase-to-payment cycle."
+  tags:
+  - ScanSource
+  - Distribution
+  - E-Commerce
+  - Order Management
+  - Partner Integration
+  - Barcode
+  - Point Of Sale
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+
+capability:
+  consumes:
+  - import: scansource-product
+    location: ./shared/product.yaml
+  - import: scansource-sales-order
+    location: ./shared/sales-order.yaml
+  - import: scansource-invoice
+    location: ./shared/invoice.yaml
+
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: scansource-partner-commerce-api
+    description: "Unified REST API for ScanSource partner commerce workflows."
+    resources:
+    - path: /v1/products
+      name: products
+      description: "Product search and catalog"
+      operations:
+      - method: GET
+        name: search-products
+        description: "Search for products in the ScanSource catalog"
+        call: "scansource-product.search-products"
+        with:
+          customerNumber: "rest.customerNumber"
+          searchText: "rest.searchText"
+          manufacturer: "rest.manufacturer"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/products/{itemNumber}
+      name: product-detail
+      description: "Product detail"
+      operations:
+      - method: GET
+        name: get-product-detail
+        description: "Get detailed product information"
+        call: "scansource-product.get-product-detail"
+        with:
+          customerNumber: "rest.customerNumber"
+          itemNumber: "rest.itemNumber"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/pricing
+      name: pricing
+      description: "Real-time product pricing"
+      operations:
+      - method: POST
+        name: get-product-pricing
+        description: "Get real-time pricing for products"
+        call: "scansource-product.get-product-pricing"
+        with:
+          items: "rest.items"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/availability
+      name: availability
+      description: "Real-time product availability"
+      operations:
+      - method: POST
+        name: get-product-availability
+        description: "Check real-time inventory availability"
+        call: "scansource-product.get-product-availability"
+        with:
+          items: "rest.items"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/orders
+      name: orders
+      description: "Sales order creation and summary"
+      operations:
+      - method: POST
+        name: create-sales-order
+        description: "Create a new sales order"
+        call: "scansource-sales-order.create-sales-order"
+        with:
+          customerNumber: "rest.customerNumber"
+        outputParameters:
+        - type: object
+          mapping: "$."
+      - method: GET
+        name: get-sales-order-summary
+        description: "Get sales order summary"
+        call: "scansource-sales-order.get-sales-order-summary"
+        with:
+          customerNumber: "rest.customerNumber"
+          fromDate: "rest.fromDate"
+          toDate: "rest.toDate"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/orders/{salesOrderNumber}
+      name: order-detail
+      description: "Sales order detail and management"
+      operations:
+      - method: GET
+        name: get-sales-order-detail
+        description: "Get comprehensive order details"
+        call: "scansource-sales-order.get-sales-order-detail"
+        with:
+          customerNumber: "rest.customerNumber"
+          salesOrderNumber: "rest.salesOrderNumber"
+        outputParameters:
+        - type: object
+          mapping: "$."
+      - method: DELETE
+        name: cancel-sales-order
+        description: "Cancel a pending order"
+        call: "scansource-sales-order.cancel-sales-order"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/tracking
+      name: tracking
+      description: "Order tracking"
+      operations:
+      - method: GET
+        name: get-order-tracking
+        description: "Get carrier tracking for an order"
+        call: "scansource-sales-order.get-order-tracking"
+        with:
+          orderNumber: "rest.orderNumber"
+          poNumber: "rest.poNumber"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/shipping-quotes
+      name: shipping-quotes
+      description: "Shipping quote generation"
+      operations:
+      - method: POST
+        name: get-shipping-quote
+        description: "Generate shipping quote before ordering"
+        call: "scansource-sales-order.get-shipping-quote"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/invoices
+      name: invoices
+      description: "Invoice summary and management"
+      operations:
+      - method: GET
+        name: get-invoice-summary
+        description: "Get invoice summary for a customer"
+        call: "scansource-invoice.get-invoice-summary"
+        with:
+          customerNumber: "rest.customerNumber"
+          fromDate: "rest.fromDate"
+          toDate: "rest.toDate"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/invoices/{invoiceNumber}
+      name: invoice-detail
+      description: "Invoice detail"
+      operations:
+      - method: GET
+        name: get-invoice-detail
+        description: "Get comprehensive invoice details"
+        call: "scansource-invoice.get-invoice-detail"
+        with:
+          customerNumber: "rest.customerNumber"
+          invoiceNumber: "rest.invoiceNumber"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/invoices/{invoiceNumber}/pdf
+      name: invoice-pdf
+      description: "Invoice PDF download"
+      operations:
+      - method: GET
+        name: get-invoice-pdf
+        description: "Download invoice as PDF"
+        call: "scansource-invoice.get-invoice-pdf"
+        outputParameters:
+        - type: object
+          mapping: "$."
+
+  - type: mcp
+    port: 9090
+    namespace: scansource-partner-commerce-mcp
+    transport: http
+    description: "MCP server for AI-assisted ScanSource partner commerce workflows."
+    tools:
+    - name: search-products
+      description: "Search for products in the ScanSource catalog by text, manufacturer, or category"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-product.search-products"
+      with:
+        customerNumber: "tools.customerNumber"
+        searchText: "tools.searchText"
+        manufacturer: "tools.manufacturer"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-product-detail
+      description: "Get detailed specifications and information for a specific product"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-product.get-product-detail"
+      with:
+        customerNumber: "tools.customerNumber"
+        itemNumber: "tools.itemNumber"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-product-pricing
+      description: "Get real-time pricing for up to 40 products for a customer"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-product.get-product-pricing"
+      with:
+        items: "tools.items"
+        customerNumber: "tools.customerNumber"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-product-availability
+      description: "Check real-time inventory availability for up to 40 products"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-product.get-product-availability"
+      with:
+        items: "tools.items"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: create-sales-order
+      description: "Create a new sales order with line items and ship-to address"
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: "scansource-sales-order.create-sales-order"
+      with:
+        customerNumber: "tools.customerNumber"
+        poNumber: "tools.poNumber"
+        lineItems: "tools.lineItems"
+        shipToAddress: "tools.shipToAddress"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-sales-order-summary
+      description: "Get a summary of sales orders for a customer with optional date range filtering"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-sales-order.get-sales-order-summary"
+      with:
+        customerNumber: "tools.customerNumber"
+        fromDate: "tools.fromDate"
+        toDate: "tools.toDate"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-sales-order-detail
+      description: "Get comprehensive details for a specific sales order including all line items and pricing"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-sales-order.get-sales-order-detail"
+      with:
+        customerNumber: "tools.customerNumber"
+        salesOrderNumber: "tools.salesOrderNumber"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: cancel-sales-order
+      description: "Cancel a pending sales order that has not yet shipped"
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: "scansource-sales-order.cancel-sales-order"
+      with:
+        salesOrderNumber: "tools.salesOrderNumber"
+        customerNumber: "tools.customerNumber"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-order-tracking
+      description: "Get carrier tracking and delivery status for an order"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-sales-order.get-order-tracking"
+      with:
+        orderNumber: "tools.orderNumber"
+        poNumber: "tools.poNumber"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-shipping-quote
+      description: "Generate shipping quote options and costs before placing an order"
+      hints:
+        readOnly: true
+        openWorld: false
+      call: "scansource-sales-order.get-shipping-quote"
+      with:
+        customerNumber: "tools.customerNumber"
+        shipToAddress: "tools.shipToAddress"
+        items: "tools.items"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-invoice-summary
+      description: "Get a summary of invoices for a customer with optional date range filtering"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-invoice.get-invoice-summary"
+      with:
+        customerNumber: "tools.customerNumber"
+        fromDate: "tools.fromDate"
+        toDate: "tools.toDate"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-invoice-detail
+      description: "Get comprehensive invoice details including line items and serial numbers"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-invoice.get-invoice-detail"
+      with:
+        customerNumber: "tools.customerNumber"
+        invoiceNumber: "tools.invoiceNumber"
+      outputParameters:
+      - type: object
+        mapping: "$."

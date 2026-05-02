@@ -1,0 +1,315 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "ScanSource Sales Order API"
+  description: "Sales order creation, management, tracking, and shipping operations for ScanSource distribution partners."
+  tags:
+  - ScanSource
+  - Orders
+  - Sales
+  - Fulfillment
+  - Tracking
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+
+capability:
+  consumes:
+  - type: http
+    namespace: scansource-sales-order
+    baseUri: https://services.scansource.com/api
+    description: "ScanSource Sales Order API for order lifecycle management."
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: "{{SCANSOURCE_API_KEY}}"
+      placement: header
+    resources:
+    - name: orders
+      path: /salesorder
+      description: "Sales order creation and management"
+      operations:
+      - name: create-sales-order
+        method: POST
+        description: "Create a synchronous sales order"
+        inputParameters:
+        - name: customerNumber
+          in: query
+          type: string
+          required: true
+          description: "Customer account number"
+        - name: requestor
+          in: query
+          type: string
+          required: false
+          description: "Requestor identifier"
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: "$."
+        body:
+          type: json
+          data:
+            poNumber: "{{tools.poNumber}}"
+            lineItems: "{{tools.lineItems}}"
+            shipToAddress: "{{tools.shipToAddress}}"
+      - name: create-sales-order-async
+        method: POST
+        description: "Create an asynchronous sales order"
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: "$."
+        body:
+          type: json
+          data:
+            poNumber: "{{tools.poNumber}}"
+            lineItems: "{{tools.lineItems}}"
+      - name: get-sales-order-summary
+        method: GET
+        description: "Get paginated order summary for a customer"
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          required: true
+          description: "Customer account number"
+        - name: fromDate
+          in: query
+          type: string
+          required: false
+          description: "Start date filter"
+        - name: toDate
+          in: query
+          type: string
+          required: false
+          description: "End date filter"
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: "Page number"
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: "$."
+      - name: get-sales-order-detail
+        method: GET
+        description: "Get comprehensive order details"
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          required: true
+          description: "Customer account number"
+        - name: salesOrderNumber
+          in: path
+          type: string
+          required: true
+          description: "Sales order number"
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: "$."
+      - name: cancel-sales-order
+        method: DELETE
+        description: "Cancel a pending sales order"
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: "$."
+        body:
+          type: json
+          data:
+            salesOrderNumber: "{{tools.salesOrderNumber}}"
+            customerNumber: "{{tools.customerNumber}}"
+    - name: tracking
+      path: /salesorder/tracking
+      description: "Order tracking and delivery status"
+      operations:
+      - name: get-order-tracking
+        method: GET
+        description: "Get carrier tracking information for an order"
+        inputParameters:
+        - name: orderNumber
+          in: query
+          type: string
+          required: false
+          description: "Order number"
+        - name: poNumber
+          in: query
+          type: string
+          required: false
+          description: "Purchase order number"
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: "$."
+      - name: get-serial-numbers
+        method: GET
+        description: "Get serial number tracking for order items"
+        inputParameters:
+        - name: orderNumber
+          in: query
+          type: string
+          required: false
+          description: "Order number"
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: "$."
+    - name: shipping
+      path: /salesorder/shipquote
+      description: "Shipping quotes"
+      operations:
+      - name: get-shipping-quote
+        method: POST
+        description: "Generate a shipping quote before order submission"
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: "$."
+        body:
+          type: json
+          data:
+            customerNumber: "{{tools.customerNumber}}"
+            shipToAddress: "{{tools.shipToAddress}}"
+            items: "{{tools.items}}"
+
+  exposes:
+  - type: rest
+    port: 8101
+    namespace: scansource-orders-api
+    resources:
+    - path: /v1/orders
+      name: orders
+      description: "Sales order management"
+      operations:
+      - method: POST
+        name: create-sales-order
+        description: "Create a sales order"
+        call: "scansource-sales-order.create-sales-order"
+        outputParameters:
+        - type: object
+          mapping: "$."
+      - method: GET
+        name: get-sales-order-summary
+        description: "Get order summary"
+        call: "scansource-sales-order.get-sales-order-summary"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/orders/{salesOrderNumber}
+      name: order-detail
+      description: "Order detail"
+      operations:
+      - method: GET
+        name: get-sales-order-detail
+        description: "Get order detail"
+        call: "scansource-sales-order.get-sales-order-detail"
+        outputParameters:
+        - type: object
+          mapping: "$."
+      - method: DELETE
+        name: cancel-sales-order
+        description: "Cancel order"
+        call: "scansource-sales-order.cancel-sales-order"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/tracking
+      name: tracking
+      description: "Order tracking"
+      operations:
+      - method: GET
+        name: get-order-tracking
+        description: "Get tracking information"
+        call: "scansource-sales-order.get-order-tracking"
+        outputParameters:
+        - type: object
+          mapping: "$."
+    - path: /v1/shipping-quotes
+      name: shipping-quotes
+      description: "Shipping quotes"
+      operations:
+      - method: POST
+        name: get-shipping-quote
+        description: "Get shipping quote"
+        call: "scansource-sales-order.get-shipping-quote"
+        outputParameters:
+        - type: object
+          mapping: "$."
+
+  - type: mcp
+    port: 9101
+    namespace: scansource-orders-mcp
+    transport: http
+    tools:
+    - name: create-sales-order
+      description: "Create a new sales order with line items and shipping destination"
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: "scansource-sales-order.create-sales-order"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-sales-order-summary
+      description: "Get a summary of sales orders for a customer with date filtering"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-sales-order.get-sales-order-summary"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-sales-order-detail
+      description: "Get comprehensive details for a specific sales order"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-sales-order.get-sales-order-detail"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: cancel-sales-order
+      description: "Cancel a pending sales order"
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: "scansource-sales-order.cancel-sales-order"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-order-tracking
+      description: "Get carrier tracking and delivery status for an order"
+      hints:
+        readOnly: true
+        openWorld: true
+      call: "scansource-sales-order.get-order-tracking"
+      outputParameters:
+      - type: object
+        mapping: "$."
+    - name: get-shipping-quote
+      description: "Generate a shipping quote before submitting an order"
+      hints:
+        readOnly: true
+        openWorld: false
+      call: "scansource-sales-order.get-shipping-quote"
+      outputParameters:
+      - type: object
+        mapping: "$."

@@ -1,0 +1,101 @@
+rules:
+  scansource-customer-number-required:
+    description: Customer number must be provided for all customer-scoped operations
+    message: "Operations that return customer-specific data must include customerNumber as a required parameter"
+    severity: error
+    given: "$.paths[*][get,post,delete]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  scansource-api-key-security:
+    description: All ScanSource API operations must require the subscription key
+    message: "Operations must use ApiKeyAuth (Ocp-Apim-Subscription-Key) security"
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: security
+      function: truthy
+
+  scansource-pagination-parameters:
+    description: List operations should support pagination via page and pageSize parameters
+    message: "List and summary endpoints should include page and pageSize query parameters"
+    severity: warn
+    given: "$.paths[*list*,*summary*][get]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  scansource-batch-size-limit:
+    description: Batch requests must not exceed 40 items
+    message: "Availability and pricing batch requests should document a maximum of 40 items per request"
+    severity: warn
+    given: "$.paths['/product/availability','product/pricing'].post.requestBody.content.application/json.schema.properties.items"
+    then:
+      field: maxItems
+      function: truthy
+
+  scansource-customer-number-path:
+    description: Customer-scoped paths should include customerNumber as a path parameter
+    message: "Customer-scoped resource paths should have customerNumber in the path"
+    severity: warn
+    given: "$.paths[*/{customerNumber}*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  scansource-response-envelope:
+    description: List responses should include totalCount for pagination support
+    message: "Collection responses should include totalCount, page, and pageSize fields"
+    severity: warn
+    given: "$.components.schemas[*Response]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  scansource-date-filter-format:
+    description: Date filter parameters must use ISO 8601 date format
+    message: "Date parameters should use format: date (ISO 8601)"
+    severity: error
+    given: "$.paths[*][get].parameters[?(@.name == 'fromDate' || @.name == 'toDate')]"
+    then:
+      field: schema.format
+      function: pattern
+      functionOptions:
+        match: "^date$"
+
+  scansource-operation-ids:
+    description: All operations must have operationId in camelCase
+    message: "OperationId must be defined and use camelCase"
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  scansource-tags-required:
+    description: All operations must have at least one tag
+    message: "Operations must include tags for categorization"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  scansource-summaries-title-case:
+    description: Operation summaries must use Title Case
+    message: "Operation summary should use Title Case"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]*$"

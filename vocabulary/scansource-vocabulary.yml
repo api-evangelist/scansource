@@ -1,0 +1,122 @@
+name: ScanSource Vocabulary
+description: Domain vocabulary for the ScanSource technology distribution platform, covering product catalog, order management, fulfillment, and invoicing concepts used in the ScanSource API ecosystem.
+url: https://github.com/api-evangelist/scansource
+created: '2026-05-02'
+modified: '2026-05-02'
+tags:
+- ScanSource
+- Distribution
+- Commerce
+- Vocabulary
+terms:
+- term: AIDC
+  label: Automatic Identification and Data Capture
+  definition: Technology category encompassing barcode scanners, RFID, and related data capture devices. One of ScanSource's primary product verticals.
+  tags:
+  - Technology
+  - Barcode
+
+- term: ASN
+  label: Advanced Ship Notice
+  definition: Electronic notification sent by ScanSource to a customer prior to shipment, containing details about the upcoming delivery including carrier, tracking numbers, and line item contents.
+  tags:
+  - Logistics
+  - Fulfillment
+
+- term: BusinessUnit
+  label: Business Unit
+  definition: A division within ScanSource that handles specific product categories or geographic regions. Used as a parameter in API requests to route to the correct pricing and inventory context.
+  tags:
+  - Organization
+  - Configuration
+
+- term: CustomerNumber
+  label: Customer Number
+  definition: The unique account identifier assigned to a ScanSource partner or reseller. Required for most API operations to provide customer-specific pricing, availability, and order history.
+  tags:
+  - Authentication
+  - Identity
+
+- term: ItemNumber
+  label: Item Number
+  definition: ScanSource's internal catalog identifier for a product. May be a ScanSource-assigned number or a manufacturer part number depending on the partNumberType parameter.
+  tags:
+  - Products
+  - Catalog
+
+- term: ManufacturerPartNumber
+  label: Manufacturer Part Number (MPN)
+  definition: The part number assigned by the product manufacturer. Used in product search, pricing, and availability queries when partNumberType is set to manufacturer.
+  tags:
+  - Products
+  - Catalog
+
+- term: PONumber
+  label: Purchase Order Number
+  definition: The customer-assigned identifier for a purchase order. Included in sales order creation and used for filtering order and invoice queries. Maps to schema:orderNumber.
+  tags:
+  - Orders
+  - Finance
+
+- term: PartNumberType
+  label: Part Number Type
+  definition: Specifies whether an item number is a ScanSource internal number or a manufacturer-assigned number. Controls how item lookups are performed in the API.
+  tags:
+  - Products
+  - Configuration
+
+- term: PriceBreak
+  label: Price Break
+  definition: A quantity-based pricing tier that offers a lower unit price when purchasing a specified minimum quantity. Returned in pricing API responses as an array of quantity-price pairs.
+  tags:
+  - Pricing
+  - Commerce
+
+- term: SalesOrderNumber
+  label: Sales Order Number
+  definition: The unique identifier assigned by ScanSource when a sales order is confirmed. Used to track, query, and manage an order throughout its lifecycle.
+  tags:
+  - Orders
+  - Reference
+
+- term: SubscriptionKey
+  label: Subscription Key (Ocp-Apim-Subscription-Key)
+  definition: The API authentication credential issued by ScanSource through their Azure API Management partner portal. Must be included in the Ocp-Apim-Subscription-Key HTTP header for all API requests.
+  tags:
+  - Authentication
+  - Security
+
+- term: VRD
+  label: Virtual Return Distribution
+  definition: A ScanSource process for managing product returns through electronic order creation, enabling partners to initiate return merchandise authorization (RMA) programmatically.
+  tags:
+  - Returns
+  - Logistics
+
+- term: Warehouse
+  label: Warehouse
+  definition: A ScanSource fulfillment center identified by a location code. Used in availability and order requests to specify preferred shipping origin or to check location-specific inventory levels.
+  tags:
+  - Logistics
+  - Inventory
+
+- term: ZeroTouchOrder
+  label: Zero-Touch Order
+  definition: An automated ordering approach where orders are created, tracked, and invoiced programmatically without manual intervention, enabled by the full suite of ScanSource APIs.
+  tags:
+  - Automation
+  - Commerce
+
+- term: BatchRequest
+  label: Batch Request
+  definition: A single API call that queries information for multiple items simultaneously. ScanSource recommends a maximum batch size of 40 items per request for pricing and availability endpoints.
+  tags:
+  - Performance
+  - Optimization
+
+- term: OnDemandQuery
+  label: On-Demand Query
+  definition: A real-time API call triggered at the point of customer interaction (e.g., when a user opens a quote or cart), as opposed to scheduled batch jobs that run overnight.
+  tags:
+  - Integration
+  - Patterns

@@ -1,0 +1,55 @@
+{
+  "title": "ScanSource Product Structure",
+  "description": "Hierarchical structure documentation for ScanSource product data returned by the Product API.",
+  "type": "object",
+  "structure": {
+    "itemNumber": { "type": "string", "example": "SSC-ZD421-30" },
+    "manufacturerPartNumber": { "type": "string", "example": "ZD42143-D0E000EZ" },
+    "manufacturer": { "type": "string", "example": "Zebra Technologies" },
+    "description": { "type": "string", "example": "Zebra ZD421 Direct Thermal Label Printer" },
+    "categoryPath": { "type": "string", "example": "Printers/Label Printers/Desktop" },
+    "upc": { "type": "string", "example": "089534203447" },
+    "isObsolete": { "type": "boolean", "example": false },
+    "weight": { "type": "number", "example": 2.75, "unit": "lbs" },
+    "dimensions": {
+      "type": "object",
+      "fields": {
+        "length": { "type": "number", "unit": "inches" },
+        "width": { "type": "number", "unit": "inches" },
+        "height": { "type": "number", "unit": "inches" }
+      }
+    },
+    "specifications": {
+      "type": "object",
+      "description": "Key-value technical specifications",
+      "example": {
+        "Resolution": "203 dpi",
+        "PrintWidth": "4.09 inches",
+        "MaxPrintSpeed": "6 ips",
+        "Interface": "USB, Ethernet, Bluetooth"
+      }
+    },
+    "pricing": {
+      "type": "object",
+      "fields": {
+        "unitPrice": { "type": "number", "example": 249.99 },
+        "currency": { "type": "string", "example": "USD" },
+        "priceBreaks": {
+          "type": "array",
+          "items": {
+            "quantity": { "type": "integer" },
+            "price": { "type": "number" }
+          }
+        }
+      }
+    },
+    "availability": {
+      "type": "object",
+      "fields": {
+        "quantityAvailable": { "type": "integer", "example": 142 },
+        "warehouse": { "type": "string", "example": "Greenville-SC" },
+        "estimatedShipDate": { "type": "string", "format": "date", "example": "2026-05-05" }
+      }
+    }
+  }
+}

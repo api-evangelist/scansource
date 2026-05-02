@@ -1,0 +1,125 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "scansource": "https://scansource.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Product": "schema:Product",
+    "Order": "schema:Order",
+    "Invoice": "schema:Invoice",
+    "Organization": "schema:Organization",
+    "PostalAddress": "schema:PostalAddress",
+    "Offer": "schema:Offer",
+    "PriceSpecification": "schema:PriceSpecification",
+
+    "itemNumber": {
+      "@id": "scansource:itemNumber",
+      "@type": "xsd:string"
+    },
+    "manufacturerPartNumber": {
+      "@id": "schema:mpn",
+      "@type": "xsd:string"
+    },
+    "manufacturer": {
+      "@id": "schema:manufacturer",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "categoryPath": {
+      "@id": "scansource:categoryPath",
+      "@type": "xsd:string"
+    },
+    "upc": {
+      "@id": "schema:gtin12",
+      "@type": "xsd:string"
+    },
+    "isObsolete": {
+      "@id": "scansource:isObsolete",
+      "@type": "xsd:boolean"
+    },
+    "weight": {
+      "@id": "schema:weight",
+      "@type": "xsd:decimal"
+    },
+    "dimensions": {
+      "@id": "schema:size",
+      "@type": "@id"
+    },
+    "unitPrice": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "currency": {
+      "@id": "schema:priceCurrency",
+      "@type": "xsd:string"
+    },
+    "quantityAvailable": {
+      "@id": "schema:inventoryLevel",
+      "@type": "xsd:integer"
+    },
+    "estimatedShipDate": {
+      "@id": "schema:expectedArrivalFrom",
+      "@type": "xsd:date"
+    },
+    "salesOrderNumber": {
+      "@id": "scansource:salesOrderNumber",
+      "@type": "xsd:string"
+    },
+    "poNumber": {
+      "@id": "schema:orderNumber",
+      "@type": "xsd:string"
+    },
+    "customerNumber": {
+      "@id": "scansource:customerNumber",
+      "@type": "xsd:string"
+    },
+    "orderDate": {
+      "@id": "schema:orderDate",
+      "@type": "xsd:dateTime"
+    },
+    "orderStatus": {
+      "@id": "schema:orderStatus",
+      "@type": "xsd:string"
+    },
+    "totalAmount": {
+      "@id": "schema:totalPrice",
+      "@type": "xsd:decimal"
+    },
+    "shipToAddress": {
+      "@id": "schema:shippingAddress",
+      "@type": "@id"
+    },
+    "lineItems": {
+      "@id": "schema:orderedItem",
+      "@container": "@set"
+    },
+    "invoiceNumber": {
+      "@id": "scansource:invoiceNumber",
+      "@type": "xsd:string"
+    },
+    "invoiceDate": {
+      "@id": "schema:dateIssued",
+      "@type": "xsd:date"
+    },
+    "dueDate": {
+      "@id": "schema:paymentDueDate",
+      "@type": "xsd:date"
+    },
+    "trackingNumber": {
+      "@id": "schema:trackingNumber",
+      "@type": "xsd:string"
+    },
+    "carrier": {
+      "@id": "schema:deliveryMethod",
+      "@type": "xsd:string"
+    },
+    "warehouse": {
+      "@id": "scansource:warehouse",
+      "@type": "xsd:string"
+    }
+  }
+}

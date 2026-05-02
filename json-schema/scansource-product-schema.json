@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/api-evangelist/scansource/blob/main/json-schema/scansource-product-schema.json",
+  "title": "ScanSource Product",
+  "description": "A product in the ScanSource technology distribution catalog including specifications, pricing, and inventory data.",
+  "type": "object",
+  "properties": {
+    "itemNumber": {
+      "type": "string",
+      "description": "ScanSource internal item number"
+    },
+    "manufacturerPartNumber": {
+      "type": "string",
+      "description": "Manufacturer's part number"
+    },
+    "manufacturer": {
+      "type": "string",
+      "description": "Manufacturer name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description"
+    },
+    "categoryPath": {
+      "type": "string",
+      "description": "Product category hierarchy path"
+    },
+    "upc": {
+      "type": "string",
+      "description": "Universal Product Code (UPC)"
+    },
+    "isObsolete": {
+      "type": "boolean",
+      "description": "Indicates whether the product has been discontinued"
+    },
+    "weight": {
+      "type": "number",
+      "description": "Product weight in pounds"
+    },
+    "dimensions": {
+      "type": "object",
+      "description": "Product physical dimensions",
+      "properties": {
+        "length": { "type": "number", "description": "Length in inches" },
+        "width": { "type": "number", "description": "Width in inches" },
+        "height": { "type": "number", "description": "Height in inches" }
+      }
+    },
+    "specifications": {
+      "type": "object",
+      "description": "Technical specifications as key-value pairs",
+      "additionalProperties": { "type": "string" }
+    },
+    "pricing": {
+      "type": "object",
+      "description": "Pricing information for the product",
+      "properties": {
+        "unitPrice": { "type": "number", "description": "Base unit price" },
+        "currency": { "type": "string", "default": "USD" },
+        "priceBreaks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "quantity": { "type": "integer" },
+              "price": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "availability": {
+      "type": "object",
+      "description": "Real-time inventory availability",
+      "properties": {
+        "quantityAvailable": { "type": "integer" },
+        "warehouse": { "type": "string" },
+        "estimatedShipDate": { "type": "string", "format": "date" }
+      }
+    }
+  },
+  "required": ["itemNumber", "manufacturer", "description"]
+}

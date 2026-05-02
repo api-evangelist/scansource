@@ -1,0 +1,67 @@
+{
+  "title": "ScanSource Create Sales Order",
+  "description": "Example request and response for creating a new sales order through the ScanSource API",
+  "request": {
+    "method": "POST",
+    "url": "https://services.scansource.com/api/salesorder/create?customerNumber=CUST123456&requestor=john.doe",
+    "headers": {
+      "Ocp-Apim-Subscription-Key": "{{SCANSOURCE_API_KEY}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "poNumber": "PO-2026-0501",
+      "shipToAddress": {
+        "name": "ABC Technology Solutions",
+        "address1": "1234 Commerce Blvd",
+        "address2": "Suite 100",
+        "city": "Charlotte",
+        "state": "NC",
+        "postalCode": "28202",
+        "country": "US"
+      },
+      "shippingMethod": "FEDEX_GROUND",
+      "lineItems": [
+        {
+          "itemNumber": "SSC-ZD421-30",
+          "quantity": 5,
+          "unitPrice": 249.99,
+          "customerItemNumber": "ZBR-PRINTER-001"
+        },
+        {
+          "itemNumber": "HC-MK3100",
+          "quantity": 2,
+          "unitPrice": 599.00
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "salesOrderNumber": "SS-20260501-98765",
+      "poNumber": "PO-2026-0501",
+      "status": "Processing",
+      "orderDate": "2026-05-02T14:23:00Z",
+      "lineItems": [
+        {
+          "lineNumber": 1,
+          "itemNumber": "SSC-ZD421-30",
+          "quantity": 5,
+          "unitPrice": 249.99,
+          "extendedPrice": 1249.95,
+          "status": "Confirmed"
+        },
+        {
+          "lineNumber": 2,
+          "itemNumber": "HC-MK3100",
+          "quantity": 2,
+          "unitPrice": 599.00,
+          "extendedPrice": 1198.00,
+          "status": "Confirmed"
+        }
+      ],
+      "totalAmount": 2447.95,
+      "currency": "USD"
+    }
+  }
+}
