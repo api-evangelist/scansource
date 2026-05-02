@@ -29,6 +29,7 @@ The ScanSource Product API provides real-time product information, pricing, and 
 
 - [Documentation](https://services.scansource.com/api/Help)
 - [OpenAPI](openapi/scansource-product-openapi.yml)
+- [JSON Schema](json-schema/scansource-product-schema.json)
 
 ### ScanSource Sales Order API
 
@@ -38,12 +39,13 @@ The ScanSource Sales Order API enables partners to create, track, and manage pur
 
 #### Tags
 
- - Orders, Sales, Commerce, Fulfillment, Tracking
+ - Orders, Sales, Commerce, Fulfillment
 
 #### Properties
 
 - [Documentation](https://services.scansource.com/api/Help)
 - [OpenAPI](openapi/scansource-sales-order-openapi.yml)
+- [JSON Schema](json-schema/scansource-order-schema.json)
 
 ### ScanSource Invoice API
 

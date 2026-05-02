@@ -29,6 +29,8 @@ apis:
     url: https://services.scansource.com/api/Help
   - type: OpenAPI
     url: openapi/scansource-product-openapi.yml
+  - type: JSONSchema
+    url: json-schema/scansource-product-schema.json
   contact:
   - FN: ScanSource Partner Support
     email: B2BRequest@scansource.com
@@ -51,6 +53,8 @@ apis:
     url: https://services.scansource.com/api/Help
   - type: OpenAPI
     url: openapi/scansource-sales-order-openapi.yml
+  - type: JSONSchema
+    url: json-schema/scansource-order-schema.json
   contact:
   - FN: ScanSource Partner Support
     email: B2BRequest@scansource.com
@@ -92,6 +96,16 @@ common:
   url: https://partnerportal.scansource.com/getstarted
 - type: PartnerPortal
   url: https://partnerdevportal.scansource.com
+- type: SpectralRules
+  url: rules/scansource-rules.yml
+- type: JSONStructure
+  url: json-structure/scansource-product-structure.json
+- type: JSONLDContext
+  url: json-ld/scansource-context.jsonld
+- type: Vocabulary
+  url: vocabulary/scansource-vocabulary.yml
+- type: Capabilities
+  url: capabilities/partner-commerce.yaml
 maintainers:
 - FN: API Evangelist
   email: info@apievangelist.com
