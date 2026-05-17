@@ -1,7 +1,7 @@
 name: ScanSource
 description: ScanSource is an international technology distributor specializing in point-of-sale (POS), payments, barcode, physical security, unified communications, collaboration, telecom, and cloud services. Founded in 1992 in Greenville, South Carolina, ScanSource provides APIs that give partners real-time access to inventory, pricing, order management, and product information to automate the sales cycle and integrate with backend ERP systems and customer portals.
 url: https://github.com/api-evangelist/scansource
-x-type: company
+kind: company
 bapiId: scansource
 tags:
 - ScanSource
