@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ScanSource Sales Order API — Shipping
+  description: 'ScanSource Sales Order API — Shipping. 1 operations. Lead operation: Get Shipping Quote. Self-contained Naftiko
+    capability covering one Scansource business surface.'
+  tags:
+  - Scansource
+  - Shipping
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sales-order-shipping
+    baseUri: https://services.scansource.com/api
+    description: ScanSource Sales Order API — Shipping business capability. Self-contained, no shared references.
+    resources:
+    - name: salesorder-shipquote
+      path: /salesorder/shipquote
+      operations:
+      - name: getshippingquote
+        method: POST
+        description: Get Shipping Quote
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: '{{env.SCANSOURCE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: sales-order-shipping-rest
+    port: 8080
+    description: REST adapter for ScanSource Sales Order API — Shipping. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/salesorder/shipquote
+      name: salesorder-shipquote
+      description: REST surface for salesorder-shipquote.
+      operations:
+      - method: POST
+        name: getshippingquote
+        description: Get Shipping Quote
+        call: sales-order-shipping.getshippingquote
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sales-order-shipping-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ScanSource Sales Order API — Shipping. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-shipping-quote
+      description: Get Shipping Quote
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: sales-order-shipping.getshippingquote
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

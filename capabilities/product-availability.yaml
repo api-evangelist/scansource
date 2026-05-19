@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ScanSource Product API — Availability
+  description: 'ScanSource Product API — Availability. 1 operations. Lead operation: Get Product Availability. Self-contained
+    Naftiko capability covering one Scansource business surface.'
+  tags:
+  - Scansource
+  - Availability
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: product-availability
+    baseUri: https://services.scansource.com/api
+    description: ScanSource Product API — Availability business capability. Self-contained, no shared references.
+    resources:
+    - name: product-availability
+      path: /product/availability
+      operations:
+      - name: getproductavailability
+        method: POST
+        description: Get Product Availability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: query
+          type: string
+          description: Customer account number
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: '{{env.SCANSOURCE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: product-availability-rest
+    port: 8080
+    description: REST adapter for ScanSource Product API — Availability. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/product/availability
+      name: product-availability
+      description: REST surface for product-availability.
+      operations:
+      - method: POST
+        name: getproductavailability
+        description: Get Product Availability
+        call: product-availability.getproductavailability
+        with:
+          customerNumber: rest.customerNumber
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: product-availability-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ScanSource Product API — Availability. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-product-availability
+      description: Get Product Availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: product-availability.getproductavailability
+      with:
+        customerNumber: tools.customerNumber
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

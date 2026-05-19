@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ScanSource Product API — Pricing
+  description: 'ScanSource Product API — Pricing. 1 operations. Lead operation: Get Product Pricing. Self-contained Naftiko
+    capability covering one Scansource business surface.'
+  tags:
+  - Scansource
+  - Pricing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: product-pricing
+    baseUri: https://services.scansource.com/api
+    description: ScanSource Product API — Pricing business capability. Self-contained, no shared references.
+    resources:
+    - name: product-pricing
+      path: /product/pricing
+      operations:
+      - name: getproductpricing
+        method: POST
+        description: Get Product Pricing
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: query
+          type: string
+          description: Customer account number for pricing context
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: '{{env.SCANSOURCE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: product-pricing-rest
+    port: 8080
+    description: REST adapter for ScanSource Product API — Pricing. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/product/pricing
+      name: product-pricing
+      description: REST surface for product-pricing.
+      operations:
+      - method: POST
+        name: getproductpricing
+        description: Get Product Pricing
+        call: product-pricing.getproductpricing
+        with:
+          customerNumber: rest.customerNumber
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: product-pricing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ScanSource Product API — Pricing. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-product-pricing
+      description: Get Product Pricing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: product-pricing.getproductpricing
+      with:
+        customerNumber: tools.customerNumber
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

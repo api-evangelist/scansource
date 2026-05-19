@@ -1,0 +1,209 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ScanSource Product API — Products
+  description: 'ScanSource Product API — Products. 2 operations. Lead operation: Get Product Detail. Self-contained Naftiko
+    capability covering one Scansource business surface.'
+  tags:
+  - Scansource
+  - Products
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: product-products
+    baseUri: https://services.scansource.com/api
+    description: ScanSource Product API — Products business capability. Self-contained, no shared references.
+    resources:
+    - name: product-detail
+      path: /product/detail
+      operations:
+      - name: getproductdetail
+        method: GET
+        description: Get Product Detail
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: query
+          type: string
+          description: Customer account number for the requesting partner
+          required: true
+        - name: itemNumber
+          in: query
+          type: string
+          description: Item number to retrieve details for
+          required: true
+        - name: partNumberType
+          in: query
+          type: string
+          description: Type of part number provided
+        - name: region
+          in: query
+          type: string
+          description: Geographic region for pricing
+    - name: product-search
+      path: /product/search
+      operations:
+      - name: searchproducts
+        method: GET
+        description: Search Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: query
+          type: string
+          description: Customer account number for the requesting partner
+          required: true
+        - name: itemNumber
+          in: query
+          type: string
+          description: Specific item number to search for
+        - name: partNumberType
+          in: query
+          type: string
+          description: Type of part number (manufacturer, vendor, etc.)
+        - name: manufacturer
+          in: query
+          type: string
+          description: Filter by manufacturer name
+        - name: catalogName
+          in: query
+          type: string
+          description: Filter by catalog name
+        - name: categoryPath
+          in: query
+          type: string
+          description: Filter by category path
+        - name: includeObsolete
+          in: query
+          type: boolean
+          description: Include discontinued/obsolete products in results
+        - name: searchText
+          in: query
+          type: string
+          description: Free-text search string
+        - name: useAndOperator
+          in: query
+          type: boolean
+          description: Use AND operator between search terms (vs OR)
+        - name: region
+          in: query
+          type: string
+          description: Geographic region for the search
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of results per page
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: '{{env.SCANSOURCE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: product-products-rest
+    port: 8080
+    description: REST adapter for ScanSource Product API — Products. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/product/detail
+      name: product-detail
+      description: REST surface for product-detail.
+      operations:
+      - method: GET
+        name: getproductdetail
+        description: Get Product Detail
+        call: product-products.getproductdetail
+        with:
+          customerNumber: rest.customerNumber
+          itemNumber: rest.itemNumber
+          partNumberType: rest.partNumberType
+          region: rest.region
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/product/search
+      name: product-search
+      description: REST surface for product-search.
+      operations:
+      - method: GET
+        name: searchproducts
+        description: Search Products
+        call: product-products.searchproducts
+        with:
+          customerNumber: rest.customerNumber
+          itemNumber: rest.itemNumber
+          partNumberType: rest.partNumberType
+          manufacturer: rest.manufacturer
+          catalogName: rest.catalogName
+          categoryPath: rest.categoryPath
+          includeObsolete: rest.includeObsolete
+          searchText: rest.searchText
+          useAndOperator: rest.useAndOperator
+          region: rest.region
+          page: rest.page
+          pageSize: rest.pageSize
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: product-products-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ScanSource Product API — Products. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-product-detail
+      description: Get Product Detail
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: product-products.getproductdetail
+      with:
+        customerNumber: tools.customerNumber
+        itemNumber: tools.itemNumber
+        partNumberType: tools.partNumberType
+        region: tools.region
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-products
+      description: Search Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: product-products.searchproducts
+      with:
+        customerNumber: tools.customerNumber
+        itemNumber: tools.itemNumber
+        partNumberType: tools.partNumberType
+        manufacturer: tools.manufacturer
+        catalogName: tools.catalogName
+        categoryPath: tools.categoryPath
+        includeObsolete: tools.includeObsolete
+        searchText: tools.searchText
+        useAndOperator: tools.useAndOperator
+        region: tools.region
+        page: tools.page
+        pageSize: tools.pageSize
+      outputParameters:
+      - type: object
+        mapping: $.

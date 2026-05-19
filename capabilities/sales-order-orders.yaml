@@ -1,0 +1,433 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ScanSource Sales Order API — Orders
+  description: 'ScanSource Sales Order API — Orders. 7 operations. Lead operation: Cancel Sales Order. Self-contained Naftiko
+    capability covering one Scansource business surface.'
+  tags:
+  - Scansource
+  - Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sales-order-orders
+    baseUri: https://services.scansource.com/api
+    description: ScanSource Sales Order API — Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: salesorder-cancel
+      path: /salesorder/cancel
+      operations:
+      - name: cancelsalesorder
+        method: DELETE
+        description: Cancel Sales Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: salesorder-create
+      path: /salesorder/create
+      operations:
+      - name: createsalesorder
+        method: POST
+        description: Create Sales Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: query
+          type: string
+          description: Customer account number
+          required: true
+        - name: requestor
+          in: query
+          type: string
+          description: Identifier of the requestor
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: salesorder-createAsync
+      path: /salesorder/createAsync
+      operations:
+      - name: createsalesorderasync
+        method: POST
+        description: Create Sales Order Async
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: salesorder-detail-customerNumber-salesOrderNumber
+      path: /salesorder/detail/{customerNumber}/{salesOrderNumber}
+      operations:
+      - name: getsalesorderdetail
+        method: GET
+        description: Get Sales Order Detail
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          description: Customer account number
+          required: true
+        - name: salesOrderNumber
+          in: path
+          type: string
+          description: ScanSource sales order number
+          required: true
+    - name: salesorder-list-customerNumber
+      path: /salesorder/list/{customerNumber}
+      operations:
+      - name: listsalesorders
+        method: GET
+        description: List Sales Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          description: Customer account number
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: pageSize
+          in: query
+          type: integer
+        - name: salesOrderNumber
+          in: query
+          type: string
+        - name: poNumber
+          in: query
+          type: string
+        - name: fromDate
+          in: query
+          type: string
+        - name: toDate
+          in: query
+          type: string
+    - name: salesorder-summary-customerNumber
+      path: /salesorder/summary/{customerNumber}
+      operations:
+      - name: getsalesordersummary
+        method: GET
+        description: Get Sales Order Summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          description: Customer account number
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Page number
+        - name: pageSize
+          in: query
+          type: integer
+          description: Results per page
+        - name: salesOrderNumber
+          in: query
+          type: string
+          description: Filter by ScanSource sales order number
+        - name: invoiceNumber
+          in: query
+          type: string
+          description: Filter by invoice number
+        - name: poNumber
+          in: query
+          type: string
+          description: Filter by customer purchase order number
+        - name: fromDate
+          in: query
+          type: string
+          description: Start date filter (ISO 8601)
+        - name: toDate
+          in: query
+          type: string
+          description: End date filter (ISO 8601)
+    - name: salesorder-vrd
+      path: /salesorder/vrd
+      operations:
+      - name: createvrdorder
+        method: POST
+        description: Create VRD Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: query
+          type: string
+          description: Customer account number
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: '{{env.SCANSOURCE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: sales-order-orders-rest
+    port: 8080
+    description: REST adapter for ScanSource Sales Order API — Orders. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/salesorder/cancel
+      name: salesorder-cancel
+      description: REST surface for salesorder-cancel.
+      operations:
+      - method: DELETE
+        name: cancelsalesorder
+        description: Cancel Sales Order
+        call: sales-order-orders.cancelsalesorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/salesorder/create
+      name: salesorder-create
+      description: REST surface for salesorder-create.
+      operations:
+      - method: POST
+        name: createsalesorder
+        description: Create Sales Order
+        call: sales-order-orders.createsalesorder
+        with:
+          customerNumber: rest.customerNumber
+          requestor: rest.requestor
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/salesorder/createasync
+      name: salesorder-createasync
+      description: REST surface for salesorder-createAsync.
+      operations:
+      - method: POST
+        name: createsalesorderasync
+        description: Create Sales Order Async
+        call: sales-order-orders.createsalesorderasync
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/salesorder/detail/{customernumber}/{salesordernumber}
+      name: salesorder-detail-customernumber-salesordernumber
+      description: REST surface for salesorder-detail-customerNumber-salesOrderNumber.
+      operations:
+      - method: GET
+        name: getsalesorderdetail
+        description: Get Sales Order Detail
+        call: sales-order-orders.getsalesorderdetail
+        with:
+          customerNumber: rest.customerNumber
+          salesOrderNumber: rest.salesOrderNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/salesorder/list/{customernumber}
+      name: salesorder-list-customernumber
+      description: REST surface for salesorder-list-customerNumber.
+      operations:
+      - method: GET
+        name: listsalesorders
+        description: List Sales Orders
+        call: sales-order-orders.listsalesorders
+        with:
+          customerNumber: rest.customerNumber
+          page: rest.page
+          pageSize: rest.pageSize
+          salesOrderNumber: rest.salesOrderNumber
+          poNumber: rest.poNumber
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/salesorder/summary/{customernumber}
+      name: salesorder-summary-customernumber
+      description: REST surface for salesorder-summary-customerNumber.
+      operations:
+      - method: GET
+        name: getsalesordersummary
+        description: Get Sales Order Summary
+        call: sales-order-orders.getsalesordersummary
+        with:
+          customerNumber: rest.customerNumber
+          page: rest.page
+          pageSize: rest.pageSize
+          salesOrderNumber: rest.salesOrderNumber
+          invoiceNumber: rest.invoiceNumber
+          poNumber: rest.poNumber
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/salesorder/vrd
+      name: salesorder-vrd
+      description: REST surface for salesorder-vrd.
+      operations:
+      - method: POST
+        name: createvrdorder
+        description: Create VRD Order
+        call: sales-order-orders.createvrdorder
+        with:
+          customerNumber: rest.customerNumber
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sales-order-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ScanSource Sales Order API — Orders. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: cancel-sales-order
+      description: Cancel Sales Order
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sales-order-orders.cancelsalesorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-sales-order
+      description: Create Sales Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sales-order-orders.createsalesorder
+      with:
+        customerNumber: tools.customerNumber
+        requestor: tools.requestor
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-sales-order-async
+      description: Create Sales Order Async
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sales-order-orders.createsalesorderasync
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sales-order-detail
+      description: Get Sales Order Detail
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sales-order-orders.getsalesorderdetail
+      with:
+        customerNumber: tools.customerNumber
+        salesOrderNumber: tools.salesOrderNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-sales-orders
+      description: List Sales Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sales-order-orders.listsalesorders
+      with:
+        customerNumber: tools.customerNumber
+        page: tools.page
+        pageSize: tools.pageSize
+        salesOrderNumber: tools.salesOrderNumber
+        poNumber: tools.poNumber
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sales-order-summary
+      description: Get Sales Order Summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sales-order-orders.getsalesordersummary
+      with:
+        customerNumber: tools.customerNumber
+        page: tools.page
+        pageSize: tools.pageSize
+        salesOrderNumber: tools.salesOrderNumber
+        invoiceNumber: tools.invoiceNumber
+        poNumber: tools.poNumber
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-vrd-order
+      description: Create VRD Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sales-order-orders.createvrdorder
+      with:
+        customerNumber: tools.customerNumber
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

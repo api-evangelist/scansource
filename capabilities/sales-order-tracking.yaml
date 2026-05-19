@@ -1,0 +1,138 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ScanSource Sales Order API — Tracking
+  description: 'ScanSource Sales Order API — Tracking. 2 operations. Lead operation: Get Serial Numbers. Self-contained Naftiko
+    capability covering one Scansource business surface.'
+  tags:
+  - Scansource
+  - Tracking
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sales-order-tracking
+    baseUri: https://services.scansource.com/api
+    description: ScanSource Sales Order API — Tracking business capability. Self-contained, no shared references.
+    resources:
+    - name: salesorder-serials
+      path: /salesorder/serials
+      operations:
+      - name: getserialnumbers
+        method: GET
+        description: Get Serial Numbers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orderNumber
+          in: query
+          type: string
+        - name: customerNumber
+          in: query
+          type: string
+    - name: salesorder-tracking
+      path: /salesorder/tracking
+      operations:
+      - name: getordertracking
+        method: GET
+        description: Get Order Tracking
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orderNumber
+          in: query
+          type: string
+          description: ScanSource order number
+        - name: poNumber
+          in: query
+          type: string
+          description: Customer purchase order number
+        - name: deliveryNumber
+          in: query
+          type: string
+          description: Delivery or ASN number
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: '{{env.SCANSOURCE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: sales-order-tracking-rest
+    port: 8080
+    description: REST adapter for ScanSource Sales Order API — Tracking. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/salesorder/serials
+      name: salesorder-serials
+      description: REST surface for salesorder-serials.
+      operations:
+      - method: GET
+        name: getserialnumbers
+        description: Get Serial Numbers
+        call: sales-order-tracking.getserialnumbers
+        with:
+          orderNumber: rest.orderNumber
+          customerNumber: rest.customerNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/salesorder/tracking
+      name: salesorder-tracking
+      description: REST surface for salesorder-tracking.
+      operations:
+      - method: GET
+        name: getordertracking
+        description: Get Order Tracking
+        call: sales-order-tracking.getordertracking
+        with:
+          orderNumber: rest.orderNumber
+          poNumber: rest.poNumber
+          deliveryNumber: rest.deliveryNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sales-order-tracking-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ScanSource Sales Order API — Tracking. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-serial-numbers
+      description: Get Serial Numbers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sales-order-tracking.getserialnumbers
+      with:
+        orderNumber: tools.orderNumber
+        customerNumber: tools.customerNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-order-tracking
+      description: Get Order Tracking
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sales-order-tracking.getordertracking
+      with:
+        orderNumber: tools.orderNumber
+        poNumber: tools.poNumber
+        deliveryNumber: tools.deliveryNumber
+      outputParameters:
+      - type: object
+        mapping: $.

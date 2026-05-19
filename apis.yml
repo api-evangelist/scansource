@@ -86,6 +86,8 @@ apis:
     in: header
 
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/scansource
 - type: Website
   url: https://www.scansource.com
 - type: DeveloperPortal

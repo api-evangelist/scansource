@@ -1,0 +1,305 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ScanSource Invoice API — Invoices
+  description: 'ScanSource Invoice API — Invoices. 4 operations. Lead operation: Get Invoice Detail. Self-contained Naftiko
+    capability covering one Scansource business surface.'
+  tags:
+  - Scansource
+  - Invoices
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SCANSOURCE_API_KEY: SCANSOURCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: invoice-invoices
+    baseUri: https://services.scansource.com/api
+    description: ScanSource Invoice API — Invoices business capability. Self-contained, no shared references.
+    resources:
+    - name: invoice-detail-customerNumber-invoiceNumber
+      path: /invoice/detail/{customerNumber}/{invoiceNumber}
+      operations:
+      - name: getinvoicedetail
+        method: GET
+        description: Get Invoice Detail
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          description: Customer account number
+          required: true
+        - name: invoiceNumber
+          in: path
+          type: string
+          description: Invoice number to retrieve
+          required: true
+        - name: excludeSerialTracking
+          in: query
+          type: boolean
+          description: Exclude serial number tracking data from response
+    - name: invoice-list-customerNumber
+      path: /invoice/list/{customerNumber}
+      operations:
+      - name: listinvoices
+        method: GET
+        description: List Invoices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          description: Customer account number
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: pageSize
+          in: query
+          type: integer
+        - name: salesOrderNumber
+          in: query
+          type: string
+        - name: invoiceNumber
+          in: query
+          type: string
+        - name: poNumber
+          in: query
+          type: string
+        - name: fromDate
+          in: query
+          type: string
+        - name: toDate
+          in: query
+          type: string
+    - name: invoice-pdf-customerNumber-invoiceNumber
+      path: /invoice/pdf/{customerNumber}/{invoiceNumber}
+      operations:
+      - name: getinvoicepdf
+        method: GET
+        description: Get Invoice PDF
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          description: Customer account number
+          required: true
+        - name: invoiceNumber
+          in: path
+          type: string
+          description: Invoice number
+          required: true
+    - name: invoice-summary-customerNumber
+      path: /invoice/summary/{customerNumber}
+      operations:
+      - name: getinvoicesummary
+        method: GET
+        description: Get Invoice Summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerNumber
+          in: path
+          type: string
+          description: Customer account number
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of results per page
+        - name: salesOrderNumber
+          in: query
+          type: string
+          description: Filter by ScanSource sales order number
+        - name: invoiceNumber
+          in: query
+          type: string
+          description: Filter by specific invoice number
+        - name: poNumber
+          in: query
+          type: string
+          description: Filter by customer purchase order number
+        - name: fromDate
+          in: query
+          type: string
+          description: Start date filter (ISO 8601 date)
+        - name: toDate
+          in: query
+          type: string
+          description: End date filter (ISO 8601 date)
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: '{{env.SCANSOURCE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: invoice-invoices-rest
+    port: 8080
+    description: REST adapter for ScanSource Invoice API — Invoices. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/invoice/detail/{customernumber}/{invoicenumber}
+      name: invoice-detail-customernumber-invoicenumber
+      description: REST surface for invoice-detail-customerNumber-invoiceNumber.
+      operations:
+      - method: GET
+        name: getinvoicedetail
+        description: Get Invoice Detail
+        call: invoice-invoices.getinvoicedetail
+        with:
+          customerNumber: rest.customerNumber
+          invoiceNumber: rest.invoiceNumber
+          excludeSerialTracking: rest.excludeSerialTracking
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/invoice/list/{customernumber}
+      name: invoice-list-customernumber
+      description: REST surface for invoice-list-customerNumber.
+      operations:
+      - method: GET
+        name: listinvoices
+        description: List Invoices
+        call: invoice-invoices.listinvoices
+        with:
+          customerNumber: rest.customerNumber
+          page: rest.page
+          pageSize: rest.pageSize
+          salesOrderNumber: rest.salesOrderNumber
+          invoiceNumber: rest.invoiceNumber
+          poNumber: rest.poNumber
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/invoice/pdf/{customernumber}/{invoicenumber}
+      name: invoice-pdf-customernumber-invoicenumber
+      description: REST surface for invoice-pdf-customerNumber-invoiceNumber.
+      operations:
+      - method: GET
+        name: getinvoicepdf
+        description: Get Invoice PDF
+        call: invoice-invoices.getinvoicepdf
+        with:
+          customerNumber: rest.customerNumber
+          invoiceNumber: rest.invoiceNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/invoice/summary/{customernumber}
+      name: invoice-summary-customernumber
+      description: REST surface for invoice-summary-customerNumber.
+      operations:
+      - method: GET
+        name: getinvoicesummary
+        description: Get Invoice Summary
+        call: invoice-invoices.getinvoicesummary
+        with:
+          customerNumber: rest.customerNumber
+          page: rest.page
+          pageSize: rest.pageSize
+          salesOrderNumber: rest.salesOrderNumber
+          invoiceNumber: rest.invoiceNumber
+          poNumber: rest.poNumber
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: invoice-invoices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ScanSource Invoice API — Invoices. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-invoice-detail
+      description: Get Invoice Detail
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: invoice-invoices.getinvoicedetail
+      with:
+        customerNumber: tools.customerNumber
+        invoiceNumber: tools.invoiceNumber
+        excludeSerialTracking: tools.excludeSerialTracking
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-invoices
+      description: List Invoices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: invoice-invoices.listinvoices
+      with:
+        customerNumber: tools.customerNumber
+        page: tools.page
+        pageSize: tools.pageSize
+        salesOrderNumber: tools.salesOrderNumber
+        invoiceNumber: tools.invoiceNumber
+        poNumber: tools.poNumber
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-invoice-pdf
+      description: Get Invoice PDF
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: invoice-invoices.getinvoicepdf
+      with:
+        customerNumber: tools.customerNumber
+        invoiceNumber: tools.invoiceNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-invoice-summary
+      description: Get Invoice Summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: invoice-invoices.getinvoicesummary
+      with:
+        customerNumber: tools.customerNumber
+        page: tools.page
+        pageSize: tools.pageSize
+        salesOrderNumber: tools.salesOrderNumber
+        invoiceNumber: tools.invoiceNumber
+        poNumber: tools.poNumber
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.
