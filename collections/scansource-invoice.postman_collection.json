@@ -1,0 +1,1141 @@
+{
+  "item": [
+    {
+      "id": "4042eff5-1c2d-4dea-91b0-52f8f0085086",
+      "name": "Invoices",
+      "description": {
+        "content": "Invoice retrieval and management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "373862ae-76c1-43f5-b9ca-380b88f48f21",
+          "name": "Get Invoice Summary",
+          "request": {
+            "name": "Get Invoice Summary",
+            "description": {
+              "content": "Retrieve a paginated summary view of invoices for a customer account, with filtering options by date range, order numbers, and invoice numbers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoice",
+                "summary",
+                ":customerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "salesOrderNumber",
+                  "value": "<string>",
+                  "description": "Filter by ScanSource sales order number"
+                },
+                {
+                  "disabled": false,
+                  "key": "invoiceNumber",
+                  "value": "<string>",
+                  "description": "Filter by specific invoice number"
+                },
+                {
+                  "disabled": false,
+                  "key": "poNumber",
+                  "value": "<string>",
+                  "description": "Filter by customer purchase order number"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Start date filter (ISO 8601 date)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "End date filter (ISO 8601 date)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerNumber",
+                  "description": "(Required) Customer account number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c0b19422-d25d-4f05-b261-c0051fdf4c20",
+              "name": "Invoice summary results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "summary",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 8105,\n  \"page\": 9332,\n  \"pageSize\": 9929,\n  \"invoices\": [\n    {\n      \"invoiceNumber\": \"string\",\n      \"salesOrderNumber\": \"string\",\n      \"poNumber\": \"string\",\n      \"invoiceDate\": \"1975-11-21\",\n      \"totalAmount\": 7799.537773146056,\n      \"currency\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"invoiceNumber\": \"string\",\n      \"salesOrderNumber\": \"string\",\n      \"poNumber\": \"string\",\n      \"invoiceDate\": \"2001-12-04\",\n      \"totalAmount\": 9147.356117448244,\n      \"currency\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cbd1296-c982-4984-990f-3b6c479aa46e",
+              "name": "Unauthorized - invalid subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "summary",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2dcaf60b-50ba-4659-ad74-4e0088f2d301",
+              "name": "Forbidden - invalid customer number",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "summary",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3f44d67-cf21-4d6a-9b26-aed8b259d534",
+          "name": "List Invoices",
+          "request": {
+            "name": "List Invoices",
+            "description": {
+              "content": "Retrieve a detailed list of invoices for a customer with extended invoice information including line items and amounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoice",
+                "list",
+                ":customerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "salesOrderNumber",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "invoiceNumber",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "poNumber",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerNumber",
+                  "description": "(Required) Customer account number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9785d180-e798-45f9-9159-2cfb03c7ade7",
+              "name": "Detailed invoice list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "list",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 472,\n  \"invoices\": [\n    {\n      \"invoiceNumber\": \"string\",\n      \"salesOrderNumber\": \"string\",\n      \"poNumber\": \"string\",\n      \"customerNumber\": \"string\",\n      \"invoiceDate\": \"2014-10-18\",\n      \"dueDate\": \"1977-11-11\",\n      \"billToAddress\": {\n        \"name\": \"string\",\n        \"address1\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"shipToAddress\": {\n        \"name\": \"string\",\n        \"address1\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"lineItems\": [\n        {\n          \"lineNumber\": 6145,\n          \"itemNumber\": \"string\",\n          \"manufacturerPartNumber\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 357,\n          \"unitPrice\": 8667.11070320611,\n          \"extendedPrice\": 5907.964464528364,\n          \"serialNumbers\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"lineNumber\": 4760,\n          \"itemNumber\": \"string\",\n          \"manufacturerPartNumber\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 5690,\n          \"unitPrice\": 4014.1941750780484,\n          \"extendedPrice\": 5503.946784269925,\n          \"serialNumbers\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"subtotal\": 4178.559399088779,\n      \"tax\": 3577.658839265161,\n      \"shippingCost\": 9300.723248667857,\n      \"totalAmount\": 922.8130526957701,\n      \"currency\": \"USD\"\n    },\n    {\n      \"invoiceNumber\": \"string\",\n      \"salesOrderNumber\": \"string\",\n      \"poNumber\": \"string\",\n      \"customerNumber\": \"string\",\n      \"invoiceDate\": \"2023-07-15\",\n      \"dueDate\": \"1984-08-12\",\n      \"billToAddress\": {\n        \"name\": \"string\",\n        \"address1\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"shipToAddress\": {\n        \"name\": \"string\",\n        \"address1\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postalCode\": \"string\",\n        \"country\": \"string\"\n      },\n      \"lineItems\": [\n        {\n          \"lineNumber\": 2251,\n          \"itemNumber\": \"string\",\n          \"manufacturerPartNumber\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 5369,\n          \"unitPrice\": 4056.0326563975245,\n          \"extendedPrice\": 6824.6603601038005,\n          \"serialNumbers\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"lineNumber\": 6187,\n          \"itemNumber\": \"string\",\n          \"manufacturerPartNumber\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 1498,\n          \"unitPrice\": 4846.142802054521,\n          \"extendedPrice\": 652.1776138541768,\n          \"serialNumbers\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"subtotal\": 8821.743682826667,\n      \"tax\": 9973.41595583519,\n      \"shippingCost\": 4689.695924660251,\n      \"totalAmount\": 9675.399474547743,\n      \"currency\": \"USD\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54bfd948-edf7-4dcd-9cbe-86949a404c7d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "list",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc9c2388-c552-4b7c-a127-5948afc2540a",
+          "name": "Get Invoice Detail",
+          "request": {
+            "name": "Get Invoice Detail",
+            "description": {
+              "content": "Retrieve comprehensive details for a specific invoice including all line items, pricing, tax information, and shipping details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoice",
+                "detail",
+                ":customerNumber",
+                ":invoiceNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "excludeSerialTracking",
+                  "value": "false",
+                  "description": "Exclude serial number tracking data from response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerNumber",
+                  "description": "(Required) Customer account number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceNumber",
+                  "description": "(Required) Invoice number to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d02cb743-331e-4c66-a0f8-65e895e82b79",
+              "name": "Detailed invoice information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "detail",
+                    ":customerNumber",
+                    ":invoiceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeSerialTracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceNumber",
+                      "description": "(Required) Invoice number to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoiceNumber\": \"string\",\n  \"salesOrderNumber\": \"string\",\n  \"poNumber\": \"string\",\n  \"customerNumber\": \"string\",\n  \"invoiceDate\": \"2022-04-06\",\n  \"dueDate\": \"1966-11-25\",\n  \"billToAddress\": {\n    \"name\": \"string\",\n    \"address1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"country\": \"string\"\n  },\n  \"shipToAddress\": {\n    \"name\": \"string\",\n    \"address1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postalCode\": \"string\",\n    \"country\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"lineNumber\": 9747,\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"description\": \"string\",\n      \"quantity\": 5531,\n      \"unitPrice\": 3039.182588380013,\n      \"extendedPrice\": 7823.279794171871,\n      \"serialNumbers\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"lineNumber\": 2732,\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"description\": \"string\",\n      \"quantity\": 4457,\n      \"unitPrice\": 1220.2011299741878,\n      \"extendedPrice\": 2411.9717090117674,\n      \"serialNumbers\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"subtotal\": 6860.438329859609,\n  \"tax\": 5821.178666518789,\n  \"shippingCost\": 1122.7756681823064,\n  \"totalAmount\": 4905.084822559139,\n  \"currency\": \"USD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63eaf737-a016-4b9c-9730-e48f9ba4a6c1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "detail",
+                    ":customerNumber",
+                    ":invoiceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeSerialTracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceNumber",
+                      "description": "(Required) Invoice number to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54f95adb-27a3-4ad3-b060-916a8e2f04b6",
+              "name": "Invoice not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "detail",
+                    ":customerNumber",
+                    ":invoiceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeSerialTracking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceNumber",
+                      "description": "(Required) Invoice number to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05aee96e-3328-4775-8b4c-632ea3689ccf",
+          "name": "Get Invoice PDF",
+          "request": {
+            "name": "Get Invoice PDF",
+            "description": {
+              "content": "Download a PDF copy of a specific invoice for record keeping or sharing with customers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoice",
+                "pdf",
+                ":customerNumber",
+                ":invoiceNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerNumber",
+                  "description": "(Required) Customer account number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceNumber",
+                  "description": "(Required) Invoice number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da130d01-1359-4f6b-bb13-9af89c828ede",
+              "name": "Invoice PDF file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "pdf",
+                    ":customerNumber",
+                    ":invoiceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceNumber",
+                      "description": "(Required) Invoice number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa342921-d22c-4e2f-bd89-9421be538390",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "pdf",
+                    ":customerNumber",
+                    ":invoiceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceNumber",
+                      "description": "(Required) Invoice number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c4f7c0f-71a4-443f-8751-64eea12c8e25",
+              "name": "Invoice not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoice",
+                    "pdf",
+                    ":customerNumber",
+                    ":invoiceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceNumber",
+                      "description": "(Required) Invoice number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.scansource.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2cab5d33-f9d9-4555-904b-0511c2dbcab6",
+    "name": "ScanSource Invoice API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.\n\nContact Support:\n Name: ScanSource Partner Support\n Email: B2BRequest@scansource.com",
+      "type": "text/plain"
+    }
+  }
+}
