@@ -87,6 +87,10 @@ apis:
       in: header
 
 common:
+  - type: DomainSecurity
+    url: security/scansource-domain-security.yml
+  - type: Authentication
+    url: authentication/scansource-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/scansource
   - type: Website
