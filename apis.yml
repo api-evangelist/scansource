@@ -87,6 +87,8 @@ apis:
       in: header
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/scansource-agentic-access.yml
   - type: DomainSecurity
     url: security/scansource-domain-security.yml
   - type: Authentication
