@@ -1,0 +1,89 @@
+openapi: 3.0.3
+info:
+  title: ScanSource Invoice Availability Shipping API
+  description: The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.
+  version: 1.0.0
+  contact:
+    name: ScanSource Partner Support
+    email: B2BRequest@scansource.com
+    url: https://partnerportal.scansource.com
+servers:
+- url: https://services.scansource.com/api
+  description: ScanSource Production API
+tags:
+- name: Shipping
+  description: Shipping quotes and logistics
+paths:
+  /salesorder/shipquote:
+    post:
+      operationId: getShippingQuote
+      summary: Get Shipping Quote
+      description: Generate a shipping quote for an order before submission, including carrier options and estimated costs.
+      tags:
+      - Shipping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipQuoteRequest'
+      responses:
+        '200':
+          description: Shipping quote options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipQuoteResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    ShipQuoteRequest:
+      type: object
+      properties:
+        customerNumber:
+          type: string
+        shipToAddress:
+          type: object
+          properties:
+            postalCode:
+              type: string
+            country:
+              type: string
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              itemNumber:
+                type: string
+              quantity:
+                type: integer
+    ShipQuoteResponse:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            type: object
+            properties:
+              carrier:
+                type: string
+              service:
+                type: string
+              estimatedDays:
+                type: integer
+              cost:
+                type: number
+              currency:
+                type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: Azure API Management subscription key from ScanSource partner portal

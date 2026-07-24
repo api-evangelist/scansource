@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: ScanSource Invoice Availability API
+  description: The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.
+  version: 1.0.0
+  contact:
+    name: ScanSource Partner Support
+    email: B2BRequest@scansource.com
+    url: https://partnerportal.scansource.com
+servers:
+- url: https://services.scansource.com/api
+  description: ScanSource Production API
+tags:
+- name: Availability
+  description: Real-time inventory availability checks
+paths:
+  /product/availability:
+    post:
+      operationId: getProductAvailability
+      summary: Get Product Availability
+      description: Check real-time inventory availability for one or more products. Recommended batch size is a maximum of 40 items per request. Used at point-of-demand to avoid unnecessary bulk downloads.
+      tags:
+      - Availability
+      parameters:
+      - name: customerNumber
+        in: query
+        required: false
+        description: Customer account number
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailabilityRequest'
+      responses:
+        '200':
+          description: Successful availability response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    AvailabilityResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              itemNumber:
+                type: string
+              manufacturerPartNumber:
+                type: string
+              quantityAvailable:
+                type: integer
+                description: Quantity currently in stock
+              warehouse:
+                type: string
+                description: Warehouse with available stock
+              estimatedShipDate:
+                type: string
+                format: date
+                description: Estimated shipping date if not immediately available
+    AvailabilityRequest:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          maxItems: 40
+          description: List of items to check availability for (max 40 per request)
+          items:
+            type: object
+            required:
+            - itemNumber
+            properties:
+              itemNumber:
+                type: string
+                description: ScanSource or manufacturer item number
+              partNumberType:
+                type: string
+                description: Type of the item number
+              quantity:
+                type: integer
+                description: Quantity needed
+        warehouse:
+          type: string
+          description: Preferred warehouse code
+        businessUnit:
+          type: string
+          description: Business unit code
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: Azure API Management subscription key from ScanSource partner portal

@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: ScanSource Invoice Availability Pricing API
+  description: The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.
+  version: 1.0.0
+  contact:
+    name: ScanSource Partner Support
+    email: B2BRequest@scansource.com
+    url: https://partnerportal.scansource.com
+servers:
+- url: https://services.scansource.com/api
+  description: ScanSource Production API
+tags:
+- name: Pricing
+  description: Real-time pricing lookups for partner customers
+paths:
+  /product/pricing:
+    post:
+      operationId: getProductPricing
+      summary: Get Product Pricing
+      description: Retrieve real-time pricing for one or more products for a specific customer. Recommended batch size is a maximum of 40 items per request.
+      tags:
+      - Pricing
+      parameters:
+      - name: customerNumber
+        in: query
+        required: true
+        description: Customer account number for pricing context
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingRequest'
+      responses:
+        '200':
+          description: Successful pricing response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    PricingResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              itemNumber:
+                type: string
+              manufacturerPartNumber:
+                type: string
+              unitPrice:
+                type: number
+                format: float
+              currency:
+                type: string
+              priceBreaks:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    quantity:
+                      type: integer
+                    price:
+                      type: number
+    PricingRequest:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          maxItems: 40
+          description: List of items to price (max 40 per request)
+          items:
+            type: object
+            required:
+            - itemNumber
+            properties:
+              itemNumber:
+                type: string
+                description: ScanSource or manufacturer item number
+              partNumberType:
+                type: string
+                description: Type of the item number
+              quantity:
+                type: integer
+                description: Quantity for pricing
+        warehouse:
+          type: string
+          description: Preferred warehouse code
+        businessUnit:
+          type: string
+          description: Business unit for pricing context
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: Azure API Management subscription key from ScanSource partner portal

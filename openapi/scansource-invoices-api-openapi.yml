@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: ScanSource Invoice API
+  title: ScanSource Invoice Availability Invoices API
   description: The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.
   version: 1.0.0
   contact:
@@ -224,43 +224,7 @@ paths:
       security:
       - ApiKeyAuth: []
 components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: Ocp-Apim-Subscription-Key
-      description: Azure API Management subscription key from ScanSource partner portal
   schemas:
-    InvoiceSummaryResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          description: Total number of matching invoices
-        page:
-          type: integer
-        pageSize:
-          type: integer
-        invoices:
-          type: array
-          items:
-            type: object
-            properties:
-              invoiceNumber:
-                type: string
-              salesOrderNumber:
-                type: string
-              poNumber:
-                type: string
-              invoiceDate:
-                type: string
-                format: date
-              totalAmount:
-                type: number
-              currency:
-                type: string
-              status:
-                type: string
     InvoiceListResponse:
       type: object
       properties:
@@ -354,3 +318,39 @@ components:
         currency:
           type: string
           default: USD
+    InvoiceSummaryResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total number of matching invoices
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        invoices:
+          type: array
+          items:
+            type: object
+            properties:
+              invoiceNumber:
+                type: string
+              salesOrderNumber:
+                type: string
+              poNumber:
+                type: string
+              invoiceDate:
+                type: string
+                format: date
+              totalAmount:
+                type: number
+              currency:
+                type: string
+              status:
+                type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: Azure API Management subscription key from ScanSource partner portal
