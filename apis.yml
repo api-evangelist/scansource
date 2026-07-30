@@ -1,3 +1,17 @@
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/scansource.png
 name: ScanSource
 description: ScanSource is an international technology distributor specializing in point-of-sale (POS), payments, barcode, physical security, unified communications, collaboration, telecom, and cloud services. Founded in 1992 in Greenville, South Carolina, ScanSource provides APIs that give partners real-time access to inventory, pricing, order management, and product information to automate the sales cycle and integrate with backend ERP systems and customer portals.
 url: https://github.com/api-evangelist/scansource
@@ -16,76 +30,118 @@ tags:
 created: '2026-05-02'
 modified: '2026-05-02'
 apis:
-  - name: ScanSource Product API
-    description: The ScanSource Product API provides real-time product information, pricing, and availability checks for technology distribution partners. Supports single and batch queries for up to 40 items per request, with integration targets including ERP systems, sales tools, and customer self-service portals.
-    humanURL: https://services.scansource.com/api/Help
-    baseURL: https://services.scansource.com/api
-    tags:
-    - Products
-    - Pricing
-    - Availability
-    - Inventory
-    properties:
-    - type: Documentation
-      url: https://services.scansource.com/api/Help
-    - type: OpenAPI
-      url: openapi/scansource-product-openapi.yml
-    - type: JSONSchema
-      url: json-schema/scansource-product-schema.json
-    contact:
-    - FN: ScanSource Partner Support
-      email: B2BRequest@scansource.com
-    x-auth:
-      type: apiKey
-      name: Ocp-Apim-Subscription-Key
-      in: header
-
-  - name: ScanSource Sales Order API
-    description: The ScanSource Sales Order API enables partners to create, track, and manage purchase orders programmatically. Supports synchronous and asynchronous order creation, order status queries, shipping quotes, order cancellation, and serial number tracking.
-    humanURL: https://services.scansource.com/api/Help
-    baseURL: https://services.scansource.com/api
-    tags:
-    - Orders
-    - Sales
-    - Commerce
-    - Fulfillment
-    properties:
-    - type: Documentation
-      url: https://services.scansource.com/api/Help
-    - type: OpenAPI
-      url: openapi/scansource-sales-order-openapi.yml
-    - type: JSONSchema
-      url: json-schema/scansource-order-schema.json
-    contact:
-    - FN: ScanSource Partner Support
-      email: B2BRequest@scansource.com
-    x-auth:
-      type: apiKey
-      name: Ocp-Apim-Subscription-Key
-      in: header
-
-  - name: ScanSource Invoice API
-    description: The ScanSource Invoice API provides access to invoicing data including invoice summaries, detailed invoice lists, individual invoice details, and PDF exports. Supports filtering by date range, sales order number, invoice number, and purchase order number.
-    humanURL: https://services.scansource.com/api/Help
-    baseURL: https://services.scansource.com/api
-    tags:
-    - Invoices
-    - Billing
-    - Finance
-    - Accounting
-    properties:
-    - type: Documentation
-      url: https://services.scansource.com/api/Help
-    - type: OpenAPI
-      url: openapi/scansource-invoice-openapi.yml
-    contact:
-    - FN: ScanSource Partner Support
-      email: B2BRequest@scansource.com
-    x-auth:
-      type: apiKey
-      name: Ocp-Apim-Subscription-Key
-      in: header
-
+- aid: scansource:scansource-availability-api
+  name: ScanSource Availability API
+  description: Real-time inventory availability checks
+  humanURL: https://services.scansource.com/api/Help
+  baseURL: https://services.scansource.com/api
+  tags:
+  - Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/scansource-availability-api-openapi.yml
+  - type: Documentation
+    url: https://services.scansource.com/api/Help
+  - type: JSONSchema
+    url: json-schema/scansource-product-schema.json
+  - type: JSONSchema
+    url: json-schema/scansource-order-schema.json
+- aid: scansource:scansource-invoices-api
+  name: ScanSource Invoices API
+  description: Invoice retrieval and management operations
+  humanURL: https://services.scansource.com/api/Help
+  baseURL: https://services.scansource.com/api
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/scansource-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://services.scansource.com/api/Help
+  - type: JSONSchema
+    url: json-schema/scansource-product-schema.json
+  - type: JSONSchema
+    url: json-schema/scansource-order-schema.json
+- aid: scansource:scansource-orders-api
+  name: ScanSource Orders API
+  description: Sales order creation and management
+  humanURL: https://services.scansource.com/api/Help
+  baseURL: https://services.scansource.com/api
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/scansource-orders-api-openapi.yml
+  - type: Documentation
+    url: https://services.scansource.com/api/Help
+  - type: JSONSchema
+    url: json-schema/scansource-product-schema.json
+  - type: JSONSchema
+    url: json-schema/scansource-order-schema.json
+- aid: scansource:scansource-pricing-api
+  name: ScanSource Pricing API
+  description: Real-time pricing lookups for partner customers
+  humanURL: https://services.scansource.com/api/Help
+  baseURL: https://services.scansource.com/api
+  tags:
+  - Pricing
+  properties:
+  - type: OpenAPI
+    url: openapi/scansource-pricing-api-openapi.yml
+  - type: Documentation
+    url: https://services.scansource.com/api/Help
+  - type: JSONSchema
+    url: json-schema/scansource-product-schema.json
+  - type: JSONSchema
+    url: json-schema/scansource-order-schema.json
+- aid: scansource:scansource-products-api
+  name: ScanSource Products API
+  description: Product information, search, and catalog operations
+  humanURL: https://services.scansource.com/api/Help
+  baseURL: https://services.scansource.com/api
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/scansource-products-api-openapi.yml
+  - type: Documentation
+    url: https://services.scansource.com/api/Help
+  - type: JSONSchema
+    url: json-schema/scansource-product-schema.json
+  - type: JSONSchema
+    url: json-schema/scansource-order-schema.json
+- aid: scansource:scansource-shipping-api
+  name: ScanSource Shipping API
+  description: Shipping quotes and logistics
+  humanURL: https://services.scansource.com/api/Help
+  baseURL: https://services.scansource.com/api
+  tags:
+  - Shipping
+  properties:
+  - type: OpenAPI
+    url: openapi/scansource-shipping-api-openapi.yml
+  - type: Documentation
+    url: https://services.scansource.com/api/Help
+  - type: JSONSchema
+    url: json-schema/scansource-product-schema.json
+  - type: JSONSchema
+    url: json-schema/scansource-order-schema.json
+- aid: scansource:scansource-tracking-api
+  name: ScanSource Tracking API
+  description: Order tracking and delivery information
+  humanURL: https://services.scansource.com/api/Help
+  baseURL: https://services.scansource.com/api
+  tags:
+  - Tracking
+  properties:
+  - type: OpenAPI
+    url: openapi/scansource-tracking-api-openapi.yml
+  - type: Documentation
+    url: https://services.scansource.com/api/Help
+  - type: JSONSchema
+    url: json-schema/scansource-product-schema.json
+  - type: JSONSchema
+    url: json-schema/scansource-order-schema.json
 common:
   - type: AgenticAccess
     url: agentic-access/scansource-agentic-access.yml
