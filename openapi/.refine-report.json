@@ -1,0 +1,26 @@
+{
+  "provider": "scansource",
+  "sources": [
+    "scansource-availability-api-openapi.yml",
+    "scansource-invoices-api-openapi.yml",
+    "scansource-orders-api-openapi.yml",
+    "scansource-pricing-api-openapi.yml",
+    "scansource-products-api-openapi.yml",
+    "scansource-shipping-api-openapi.yml",
+    "scansource-tracking-api-openapi.yml"
+  ],
+  "outputs": [
+    "scansource-availability-api-openapi.yml",
+    "scansource-invoices-api-openapi.yml",
+    "scansource-orders-api-openapi.yml",
+    "scansource-pricing-api-openapi.yml",
+    "scansource-products-api-openapi.yml",
+    "scansource-shipping-api-openapi.yml",
+    "scansource-tracking-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
