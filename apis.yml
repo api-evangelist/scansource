@@ -169,8 +169,6 @@ common:
     url: json-ld/scansource-context.jsonld
   - type: Vocabulary
     url: vocabulary/scansource-vocabulary.yml
-  - type: Capabilities
-    url: capabilities/partner-commerce.yaml
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
