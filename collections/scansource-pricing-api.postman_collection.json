@@ -1,0 +1,267 @@
+{
+  "item": [
+    {
+      "id": "0f48ac40-5dfe-4e35-903c-6b7eaf61fff4",
+      "name": "Pricing",
+      "description": {
+        "content": "Real-time pricing lookups for partner customers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fbeb0ae8-f4d7-424b-8ecc-aba54d9927df",
+          "name": "Get Product Pricing",
+          "request": {
+            "name": "Get Product Pricing",
+            "description": {
+              "content": "Retrieve real-time pricing for one or more products for a specific customer. Recommended batch size is a maximum of 40 items per request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product",
+                "pricing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerNumber",
+                  "value": "<string>",
+                  "description": "(Required) Customer account number for pricing context"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"warehouse\": \"<string>\",\n  \"businessUnit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70f72164-116f-4a5c-9a0c-a359edba9ce2",
+              "name": "Successful pricing response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"warehouse\": \"<string>\",\n  \"businessUnit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"unitPrice\": 9316.534134809384,\n      \"currency\": \"string\",\n      \"priceBreaks\": [\n        {\n          \"quantity\": 7398,\n          \"price\": 361.4212849085152\n        },\n        {\n          \"quantity\": 6571,\n          \"price\": 2209.978261115755\n        }\n      ]\n    },\n    {\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"unitPrice\": 8091.922460279678,\n      \"currency\": \"string\",\n      \"priceBreaks\": [\n        {\n          \"quantity\": 5076,\n          \"price\": 3056.0673755868684\n        },\n        {\n          \"quantity\": 1523,\n          \"price\": 2059.2807304593107\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eabfe47f-3d49-4216-aac0-39a59f7d000e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"warehouse\": \"<string>\",\n  \"businessUnit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c56347ca-6047-49f3-ad06-b06b62a5fbe4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"warehouse\": \"<string>\",\n  \"businessUnit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.scansource.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6bd35b82-da42-4c8b-89b9-a6dfa5de6d6d",
+    "name": "ScanSource Invoice Availability Pricing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.\n\nContact Support:\n Name: ScanSource Partner Support\n Email: B2BRequest@scansource.com",
+      "type": "text/plain"
+    }
+  }
+}

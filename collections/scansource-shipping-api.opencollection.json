@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ScanSource Invoice Availability Shipping API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shipping Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.scansource.com/api/salesorder/shipquote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Generate a shipping quote for an order before submission, including carrier options and estimated costs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

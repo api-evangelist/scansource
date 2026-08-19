@@ -1,0 +1,267 @@
+{
+  "item": [
+    {
+      "id": "70f89f7d-88f0-4a2e-ad0e-51dd49352bfb",
+      "name": "Availability",
+      "description": {
+        "content": "Real-time inventory availability checks",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3097ed1f-0c58-4159-96a8-de2ec4a799fa",
+          "name": "Get Product Availability",
+          "request": {
+            "name": "Get Product Availability",
+            "description": {
+              "content": "Check real-time inventory availability for one or more products. Recommended batch size is a maximum of 40 items per request. Used at point-of-demand to avoid unnecessary bulk downloads.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product",
+                "availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerNumber",
+                  "value": "<string>",
+                  "description": "Customer account number"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"warehouse\": \"<string>\",\n  \"businessUnit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d830aee0-b1cb-41f7-9a9d-4416c8edda87",
+              "name": "Successful availability response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"warehouse\": \"<string>\",\n  \"businessUnit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"quantityAvailable\": 864,\n      \"warehouse\": \"string\",\n      \"estimatedShipDate\": \"1975-01-24\"\n    },\n    {\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"quantityAvailable\": 640,\n      \"warehouse\": \"string\",\n      \"estimatedShipDate\": \"1969-09-13\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c167b83b-2484-49d2-8a09-34e9045d9bbb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"warehouse\": \"<string>\",\n  \"businessUnit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a44dd0a1-0dec-4c4a-b818-a320da2150a7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"partNumberType\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"warehouse\": \"<string>\",\n  \"businessUnit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.scansource.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "59be0fc9-23de-47d1-bd3c-5b81d6645476",
+    "name": "ScanSource Invoice Availability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.\n\nContact Support:\n Name: ScanSource Partner Support\n Email: B2BRequest@scansource.com",
+      "type": "text/plain"
+    }
+  }
+}

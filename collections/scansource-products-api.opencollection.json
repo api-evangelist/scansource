@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ScanSource Invoice Availability Products API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/product/search",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "query",
+                "description": "Customer account number for the requesting partner"
+              },
+              {
+                "name": "itemNumber",
+                "value": "",
+                "type": "query",
+                "description": "Specific item number to search for"
+              },
+              {
+                "name": "partNumberType",
+                "value": "",
+                "type": "query",
+                "description": "Type of part number (manufacturer, vendor, etc.)"
+              },
+              {
+                "name": "manufacturer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by manufacturer name"
+              },
+              {
+                "name": "catalogName",
+                "value": "",
+                "type": "query",
+                "description": "Filter by catalog name"
+              },
+              {
+                "name": "categoryPath",
+                "value": "",
+                "type": "query",
+                "description": "Filter by category path"
+              },
+              {
+                "name": "includeObsolete",
+                "value": "",
+                "type": "query",
+                "description": "Include discontinued/obsolete products in results"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search string"
+              },
+              {
+                "name": "useAndOperator",
+                "value": "",
+                "type": "query",
+                "description": "Use AND operator between search terms (vs OR)"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Geographic region for the search"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for products in the ScanSource catalog using filters such as manufacturer, category, and keyword text. Returns paginated results."
+        },
+        {
+          "info": {
+            "name": "Get Product Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/product/detail",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "query",
+                "description": "Customer account number for the requesting partner"
+              },
+              {
+                "name": "itemNumber",
+                "value": "",
+                "type": "query",
+                "description": "Item number to retrieve details for"
+              },
+              {
+                "name": "partNumberType",
+                "value": "",
+                "type": "query",
+                "description": "Type of part number provided"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Geographic region for pricing"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve detailed product information including specifications, dimensions, weight, and other attributes for a specific item."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

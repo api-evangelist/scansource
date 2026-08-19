@@ -1,0 +1,245 @@
+{
+  "item": [
+    {
+      "id": "4e0728bb-2110-4bda-a738-4d6bf2b6f579",
+      "name": "Shipping",
+      "description": {
+        "content": "Shipping quotes and logistics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "104b4225-daa6-47f9-8c33-d25e6c521133",
+          "name": "Get Shipping Quote",
+          "request": {
+            "name": "Get Shipping Quote",
+            "description": {
+              "content": "Generate a shipping quote for an order before submission, including carrier options and estimated costs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "shipquote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"shipToAddress\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a66a7055-b876-4d68-b26e-719cbb112089",
+              "name": "Shipping quote options",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "shipquote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"shipToAddress\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quotes\": [\n    {\n      \"carrier\": \"string\",\n      \"service\": \"string\",\n      \"estimatedDays\": 3258,\n      \"cost\": 3073.1811816901945,\n      \"currency\": \"string\"\n    },\n    {\n      \"carrier\": \"string\",\n      \"service\": \"string\",\n      \"estimatedDays\": 5492,\n      \"cost\": 2746.224724323686,\n      \"currency\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa6564ce-0bed-4885-a8a7-507c3c1150b5",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "shipquote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"shipToAddress\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39cad8d3-e006-400e-a590-37d5ea0692aa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "shipquote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"shipToAddress\": {\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.scansource.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5a90c41e-24f6-4113-9bca-40f13bba89eb",
+    "name": "ScanSource Invoice Availability Shipping API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.\n\nContact Support:\n Name: ScanSource Partner Support\n Email: B2BRequest@scansource.com",
+      "type": "text/plain"
+    }
+  }
+}

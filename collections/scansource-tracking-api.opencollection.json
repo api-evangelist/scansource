@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ScanSource Invoice Availability Tracking API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Order Tracking",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/salesorder/tracking",
+            "params": [
+              {
+                "name": "orderNumber",
+                "value": "",
+                "type": "query",
+                "description": "ScanSource order number"
+              },
+              {
+                "name": "poNumber",
+                "value": "",
+                "type": "query",
+                "description": "Customer purchase order number"
+              },
+              {
+                "name": "deliveryNumber",
+                "value": "",
+                "type": "query",
+                "description": "Delivery or ASN number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve carrier tracking information and delivery status for an order."
+        },
+        {
+          "info": {
+            "name": "Get Serial Numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/salesorder/serials",
+            "params": [
+              {
+                "name": "orderNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve serial number tracking information for serialized products in an order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

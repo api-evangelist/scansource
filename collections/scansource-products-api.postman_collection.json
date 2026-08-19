@@ -1,0 +1,826 @@
+{
+  "item": [
+    {
+      "id": "89052646-df2a-488e-908b-a1678dc11156",
+      "name": "Products",
+      "description": {
+        "content": "Product information, search, and catalog operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc269c9a-5a04-4143-baa0-bf1c545d9db5",
+          "name": "Search Products",
+          "request": {
+            "name": "Search Products",
+            "description": {
+              "content": "Search for products in the ScanSource catalog using filters such as manufacturer, category, and keyword text. Returns paginated results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerNumber",
+                  "value": "<string>",
+                  "description": "(Required) Customer account number for the requesting partner"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemNumber",
+                  "value": "<string>",
+                  "description": "Specific item number to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "partNumberType",
+                  "value": "<string>",
+                  "description": "Type of part number (manufacturer, vendor, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "manufacturer",
+                  "value": "<string>",
+                  "description": "Filter by manufacturer name"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalogName",
+                  "value": "<string>",
+                  "description": "Filter by catalog name"
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryPath",
+                  "value": "<string>",
+                  "description": "Filter by category path"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeObsolete",
+                  "value": "<boolean>",
+                  "description": "Include discontinued/obsolete products in results"
+                },
+                {
+                  "disabled": false,
+                  "key": "searchText",
+                  "value": "<string>",
+                  "description": "Free-text search string"
+                },
+                {
+                  "disabled": false,
+                  "key": "useAndOperator",
+                  "value": "<boolean>",
+                  "description": "Use AND operator between search terms (vs OR)"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>",
+                  "description": "Geographic region for the search"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of results per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c9363082-19ae-456e-8dfe-48022fa881e2",
+              "name": "Successful product search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumberType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "manufacturer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "catalogName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeObsolete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchText",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "useAndOperator",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 3373,\n  \"page\": 3321,\n  \"pageSize\": 7126,\n  \"items\": [\n    {\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"manufacturer\": \"string\",\n      \"description\": \"string\",\n      \"categoryPath\": \"string\",\n      \"isObsolete\": true\n    },\n    {\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"manufacturer\": \"string\",\n      \"description\": \"string\",\n      \"categoryPath\": \"string\",\n      \"isObsolete\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d79039e3-b1c7-4cb9-a886-1b2237939102",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumberType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "manufacturer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "catalogName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeObsolete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchText",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "useAndOperator",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b112689-3e33-4b4a-9223-4c7f0106d128",
+              "name": "Unauthorized - invalid subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumberType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "manufacturer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "catalogName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeObsolete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchText",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "useAndOperator",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "83996d96-ff0b-4afb-8777-ec11afcbeca4",
+              "name": "Forbidden - invalid customer number",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumberType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "manufacturer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "catalogName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeObsolete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchText",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "useAndOperator",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a264cde2-2a1d-44d9-aef4-95a0444feb7c",
+          "name": "Get Product Detail",
+          "request": {
+            "name": "Get Product Detail",
+            "description": {
+              "content": "Retrieve detailed product information including specifications, dimensions, weight, and other attributes for a specific item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "product",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerNumber",
+                  "value": "<string>",
+                  "description": "(Required) Customer account number for the requesting partner"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemNumber",
+                  "value": "<string>",
+                  "description": "(Required) Item number to retrieve details for"
+                },
+                {
+                  "disabled": false,
+                  "key": "partNumberType",
+                  "value": "<string>",
+                  "description": "Type of part number provided"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>",
+                  "description": "Geographic region for pricing"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0653ce29-396f-4d1d-b301-9ee19ab9ed9f",
+              "name": "Successful product detail response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumberType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"itemNumber\": \"string\",\n  \"manufacturerPartNumber\": \"string\",\n  \"manufacturer\": \"string\",\n  \"description\": \"string\",\n  \"specifications\": {\n    \"key_0\": \"string\"\n  },\n  \"weight\": 1802.3169621924662,\n  \"dimensions\": {\n    \"length\": 5252.8092651369425,\n    \"width\": 6602.767438622837,\n    \"height\": 8189.130855591824\n  },\n  \"categoryPath\": \"string\",\n  \"upc\": \"string\",\n  \"isObsolete\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8ff0b2b-884f-4ef8-aed6-0c51c649e9a8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumberType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c2f708b-0447-408a-a3b8-bdd2ecf916c1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumberType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "96af2ce5-5f7d-4a79-9638-b98a61ca43a3",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "product",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "itemNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumberType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.scansource.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c0010d80-2a87-465f-84d9-f1d5d83b6ee9",
+    "name": "ScanSource Invoice Availability Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.\n\nContact Support:\n Name: ScanSource Partner Support\n Email: B2BRequest@scansource.com",
+      "type": "text/plain"
+    }
+  }
+}

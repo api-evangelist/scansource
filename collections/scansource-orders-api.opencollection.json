@@ -1,0 +1,277 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ScanSource Invoice Availability Orders API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Sales Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.scansource.com/api/salesorder/create",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "query",
+                "description": "Customer account number"
+              },
+              {
+                "name": "requestor",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the requestor"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new synchronous sales order in ScanSource. Returns the order confirmation upon completion. Recommended for testing in sandbox before production use."
+        },
+        {
+          "info": {
+            "name": "Create Sales Order Async",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.scansource.com/api/salesorder/createAsync",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new asynchronous sales order. Returns immediately with a reference and processes the order in the background. Use for high-volume or non-blocking integrations."
+        },
+        {
+          "info": {
+            "name": "Create VRD Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.scansource.com/api/salesorder/vrd",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "query",
+                "description": "Customer account number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a Virtual Return Distribution (VRD) order for managing product returns through ScanSource."
+        },
+        {
+          "info": {
+            "name": "Get Sales Order Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/salesorder/summary/:customerNumber",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "path",
+                "description": "Customer account number"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "salesOrderNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ScanSource sales order number"
+              },
+              {
+                "name": "invoiceNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invoice number"
+              },
+              {
+                "name": "poNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by customer purchase order number"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date filter (ISO 8601)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date filter (ISO 8601)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated summary view of sales orders for a customer. Supports filtering by date range, sales order number, invoice number, and purchase order number."
+        },
+        {
+          "info": {
+            "name": "List Sales Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/salesorder/list/:customerNumber",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "path",
+                "description": "Customer account number"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "salesOrderNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "poNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a detailed list of sales orders for a customer with extended order information including pricing and line item details."
+        },
+        {
+          "info": {
+            "name": "Get Sales Order Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/salesorder/detail/:customerNumber/:salesOrderNumber",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "path",
+                "description": "Customer account number"
+              },
+              {
+                "name": "salesOrderNumber",
+                "value": "",
+                "type": "path",
+                "description": "ScanSource sales order number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve comprehensive details for a specific sales order including all line items, pricing, ASN information, and status."
+        },
+        {
+          "info": {
+            "name": "Cancel Sales Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://services.scansource.com/api/salesorder/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancel a pending sales order. Orders that have already shipped cannot be cancelled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

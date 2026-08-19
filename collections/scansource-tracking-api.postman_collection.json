@@ -1,0 +1,431 @@
+{
+  "item": [
+    {
+      "id": "784fc703-70e0-4ea8-9941-3598b833d10b",
+      "name": "Tracking",
+      "description": {
+        "content": "Order tracking and delivery information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "066358fa-a5f5-4413-826d-e1e14c061daa",
+          "name": "Get Order Tracking",
+          "request": {
+            "name": "Get Order Tracking",
+            "description": {
+              "content": "Retrieve carrier tracking information and delivery status for an order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "tracking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderNumber",
+                  "value": "<string>",
+                  "description": "ScanSource order number"
+                },
+                {
+                  "disabled": false,
+                  "key": "poNumber",
+                  "value": "<string>",
+                  "description": "Customer purchase order number"
+                },
+                {
+                  "disabled": false,
+                  "key": "deliveryNumber",
+                  "value": "<string>",
+                  "description": "Delivery or ASN number"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "12e158c2-d244-4dc4-89d8-a6b15544c3f1",
+              "name": "Tracking information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deliveryNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderNumber\": \"string\",\n  \"packages\": [\n    {\n      \"trackingNumber\": \"string\",\n      \"carrier\": \"string\",\n      \"status\": \"string\",\n      \"estimatedDelivery\": \"1961-03-06\",\n      \"events\": [\n        {\n          \"date\": \"1979-06-21T10:43:18.240Z\",\n          \"location\": \"string\",\n          \"description\": \"string\"\n        },\n        {\n          \"date\": \"1985-04-20T09:36:34.638Z\",\n          \"location\": \"string\",\n          \"description\": \"string\"\n        }\n      ]\n    },\n    {\n      \"trackingNumber\": \"string\",\n      \"carrier\": \"string\",\n      \"status\": \"string\",\n      \"estimatedDelivery\": \"1958-02-03\",\n      \"events\": [\n        {\n          \"date\": \"2012-10-21T11:51:20.833Z\",\n          \"location\": \"string\",\n          \"description\": \"string\"\n        },\n        {\n          \"date\": \"1960-10-04T07:23:45.033Z\",\n          \"location\": \"string\",\n          \"description\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2480c857-c068-4180-87bf-3eb287906882",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deliveryNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6a808fe-06c7-4228-af49-c8276009b9c1",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deliveryNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c06deb4-bc14-4784-8ce3-018e1fa6166c",
+          "name": "Get Serial Numbers",
+          "request": {
+            "name": "Get Serial Numbers",
+            "description": {
+              "content": "Retrieve serial number tracking information for serialized products in an order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "serials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderNumber",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "customerNumber",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a4eee882-8db1-448d-9148-90202d8ba957",
+              "name": "Serial number data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "serials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderNumber\": \"string\",\n  \"serials\": [\n    {\n      \"itemNumber\": \"string\",\n      \"serialNumber\": \"string\",\n      \"lineNumber\": 456\n    },\n    {\n      \"itemNumber\": \"string\",\n      \"serialNumber\": \"string\",\n      \"lineNumber\": 6880\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccd8cb68-434f-4560-a04d-b69c1ab245eb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "serials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.scansource.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ba929e35-9c85-4270-ab98-48435630a179",
+    "name": "ScanSource Invoice Availability Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.\n\nContact Support:\n Name: ScanSource Partner Support\n Email: B2BRequest@scansource.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1816 @@
+{
+  "item": [
+    {
+      "id": "0676a599-816c-42d1-ab9f-19bec37ad720",
+      "name": "Orders",
+      "description": {
+        "content": "Sales order creation and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac218283-48da-4953-ab24-f1b33bac63db",
+          "name": "Create Sales Order",
+          "request": {
+            "name": "Create Sales Order",
+            "description": {
+              "content": "Create a new synchronous sales order in ScanSource. Returns the order confirmation upon completion. Recommended for testing in sandbox before production use.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerNumber",
+                  "value": "<string>",
+                  "description": "(Required) Customer account number"
+                },
+                {
+                  "disabled": false,
+                  "key": "requestor",
+                  "value": "<string>",
+                  "description": "Identifier of the requestor"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"poNumber\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    }\n  ],\n  \"shipToAddress\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"shippingMethod\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c618419a-3ef2-4e2d-bf1e-1d87dde9d3dc",
+              "name": "Order successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"poNumber\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    }\n  ],\n  \"shipToAddress\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"shippingMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"salesOrderNumber\": \"string\",\n  \"poNumber\": \"string\",\n  \"status\": \"string\",\n  \"orderDate\": \"1966-12-27T07:57:02.058Z\",\n  \"lineItems\": [\n    {\n      \"lineNumber\": 5882,\n      \"itemNumber\": \"string\",\n      \"quantity\": 3202,\n      \"unitPrice\": 2379.0104621844353,\n      \"status\": \"string\"\n    },\n    {\n      \"lineNumber\": 5288,\n      \"itemNumber\": \"string\",\n      \"quantity\": 9288,\n      \"unitPrice\": 631.53448203628,\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86032c97-8fdb-46de-b379-55445fd68eb1",
+              "name": "Bad request - invalid order data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"poNumber\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    }\n  ],\n  \"shipToAddress\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"shippingMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "163929e5-2268-4426-a055-fb3f2a8b8f24",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "requestor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"poNumber\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    }\n  ],\n  \"shipToAddress\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"shippingMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7109f02d-f0ca-4fad-bffb-a091ebd8b9db",
+          "name": "Create Sales Order Async",
+          "request": {
+            "name": "Create Sales Order Async",
+            "description": {
+              "content": "Create a new asynchronous sales order. Returns immediately with a reference and processes the order in the background. Use for high-volume or non-blocking integrations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "createAsync"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"poNumber\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    }\n  ],\n  \"shipToAddress\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"shippingMethod\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a4c72dd-c736-47af-8db6-c58e0a8612ef",
+              "name": "Order accepted for async processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "createAsync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"poNumber\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    }\n  ],\n  \"shipToAddress\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"shippingMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"referenceId\": \"string\",\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9330359d-6dc6-4ae0-83cf-386c245191c8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "createAsync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"poNumber\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    }\n  ],\n  \"shipToAddress\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"shippingMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ef808ad-f37a-4dfe-89cb-89f2ddebbee0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "createAsync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"poNumber\": \"<string>\",\n  \"lineItems\": [\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    },\n    {\n      \"itemNumber\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"partNumberType\": \"<string>\",\n      \"unitPrice\": \"<number>\",\n      \"customerItemNumber\": \"<string>\"\n    }\n  ],\n  \"shipToAddress\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"shippingMethod\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "390ebdb4-fe72-4405-aceb-ec78b368dd3b",
+          "name": "Create VRD Order",
+          "request": {
+            "name": "Create VRD Order",
+            "description": {
+              "content": "Create a Virtual Return Distribution (VRD) order for managing product returns through ScanSource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "vrd"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerNumber",
+                  "value": "<string>",
+                  "description": "(Required) Customer account number"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "731de7c2-f11b-42d7-92c1-40fd48fced18",
+              "name": "VRD order created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "vrd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"salesOrderNumber\": \"string\",\n  \"poNumber\": \"string\",\n  \"status\": \"string\",\n  \"orderDate\": \"1993-03-06T21:54:09.793Z\",\n  \"lineItems\": [\n    {\n      \"lineNumber\": 5624,\n      \"itemNumber\": \"string\",\n      \"quantity\": 2415,\n      \"unitPrice\": 4998.8669257302,\n      \"status\": \"string\"\n    },\n    {\n      \"lineNumber\": 3438,\n      \"itemNumber\": \"string\",\n      \"quantity\": 278,\n      \"unitPrice\": 5846.620356013395,\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50c2ab83-b796-45a6-961d-ecf245094c9b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "vrd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b698e6cb-0b21-407b-8152-9f3665e00c04",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "vrd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c0e64d0-ec98-4ca0-acc1-2c86ad943722",
+          "name": "Get Sales Order Summary",
+          "request": {
+            "name": "Get Sales Order Summary",
+            "description": {
+              "content": "Retrieve a paginated summary view of sales orders for a customer. Supports filtering by date range, sales order number, invoice number, and purchase order number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "summary",
+                ":customerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "salesOrderNumber",
+                  "value": "<string>",
+                  "description": "Filter by ScanSource sales order number"
+                },
+                {
+                  "disabled": false,
+                  "key": "invoiceNumber",
+                  "value": "<string>",
+                  "description": "Filter by invoice number"
+                },
+                {
+                  "disabled": false,
+                  "key": "poNumber",
+                  "value": "<string>",
+                  "description": "Filter by customer purchase order number"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Start date filter (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "End date filter (ISO 8601)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerNumber",
+                  "description": "(Required) Customer account number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "079dc498-7768-4a8d-b61f-72a4de1392d1",
+              "name": "Order summary results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "summary",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 1066,\n  \"page\": 7162,\n  \"pageSize\": 4929,\n  \"orders\": [\n    {\n      \"salesOrderNumber\": \"string\",\n      \"poNumber\": \"string\",\n      \"orderDate\": \"1978-02-25T12:04:27.941Z\",\n      \"status\": \"string\",\n      \"totalAmount\": 3119.0730294590476\n    },\n    {\n      \"salesOrderNumber\": \"string\",\n      \"poNumber\": \"string\",\n      \"orderDate\": \"1975-05-20T01:33:45.235Z\",\n      \"status\": \"string\",\n      \"totalAmount\": 3052.0158769409245\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8e9c91f-166e-4ea3-bb83-403626e312e8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "summary",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "829fa45c-89d4-47ef-bfd7-93e331b7bea6",
+              "name": "Forbidden - invalid customer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "summary",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6d0a4ca-7c92-4ffe-868d-8c745c1287f2",
+          "name": "List Sales Orders",
+          "request": {
+            "name": "List Sales Orders",
+            "description": {
+              "content": "Retrieve a detailed list of sales orders for a customer with extended order information including pricing and line item details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "list",
+                ":customerNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "salesOrderNumber",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "poNumber",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerNumber",
+                  "description": "(Required) Customer account number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "30d3b256-41fe-45dd-81be-a6124ceafe8b",
+              "name": "Detailed order list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "list",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 2370,\n  \"orders\": [\n    {\n      \"salesOrderNumber\": \"string\",\n      \"poNumber\": \"string\",\n      \"customerNumber\": \"string\",\n      \"orderDate\": \"1970-04-26T05:04:13.086Z\",\n      \"status\": \"string\",\n      \"shipToAddress\": {},\n      \"lineItems\": [\n        {\n          \"lineNumber\": 22,\n          \"itemNumber\": \"string\",\n          \"manufacturerPartNumber\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 3095,\n          \"unitPrice\": 358.0734694104071,\n          \"extendedPrice\": 8000.244243339974,\n          \"status\": \"string\"\n        },\n        {\n          \"lineNumber\": 6807,\n          \"itemNumber\": \"string\",\n          \"manufacturerPartNumber\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 50,\n          \"unitPrice\": 896.3360651580199,\n          \"extendedPrice\": 7400.292701091017,\n          \"status\": \"string\"\n        }\n      ],\n      \"totalAmount\": 7677.6562003981235,\n      \"currency\": \"string\"\n    },\n    {\n      \"salesOrderNumber\": \"string\",\n      \"poNumber\": \"string\",\n      \"customerNumber\": \"string\",\n      \"orderDate\": \"2024-11-15T15:56:14.190Z\",\n      \"status\": \"string\",\n      \"shipToAddress\": {},\n      \"lineItems\": [\n        {\n          \"lineNumber\": 1263,\n          \"itemNumber\": \"string\",\n          \"manufacturerPartNumber\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 8774,\n          \"unitPrice\": 5867.762532683259,\n          \"extendedPrice\": 1200.5801114574645,\n          \"status\": \"string\"\n        },\n        {\n          \"lineNumber\": 6803,\n          \"itemNumber\": \"string\",\n          \"manufacturerPartNumber\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 9901,\n          \"unitPrice\": 2672.264230970759,\n          \"extendedPrice\": 7213.240411013391,\n          \"status\": \"string\"\n        }\n      ],\n      \"totalAmount\": 8166.443456487227,\n      \"currency\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba02f64e-41b1-4baf-b3ef-f3b67fdd3108",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "list",
+                    ":customerNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "salesOrderNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "poNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f02c444-f766-49fb-a894-3863e7dad0cb",
+          "name": "Get Sales Order Detail",
+          "request": {
+            "name": "Get Sales Order Detail",
+            "description": {
+              "content": "Retrieve comprehensive details for a specific sales order including all line items, pricing, ASN information, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "detail",
+                ":customerNumber",
+                ":salesOrderNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerNumber",
+                  "description": "(Required) Customer account number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "salesOrderNumber",
+                  "description": "(Required) ScanSource sales order number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e8ee373d-a48c-4634-9b2b-4681d3e85dd8",
+              "name": "Detailed order information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "detail",
+                    ":customerNumber",
+                    ":salesOrderNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesOrderNumber",
+                      "description": "(Required) ScanSource sales order number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"salesOrderNumber\": \"string\",\n  \"poNumber\": \"string\",\n  \"customerNumber\": \"string\",\n  \"orderDate\": \"2026-01-21T23:45:51.872Z\",\n  \"status\": \"string\",\n  \"shipToAddress\": {},\n  \"lineItems\": [\n    {\n      \"lineNumber\": 4459,\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"description\": \"string\",\n      \"quantity\": 8313,\n      \"unitPrice\": 8023.71620845729,\n      \"extendedPrice\": 3629.7514853430957,\n      \"status\": \"string\"\n    },\n    {\n      \"lineNumber\": 4457,\n      \"itemNumber\": \"string\",\n      \"manufacturerPartNumber\": \"string\",\n      \"description\": \"string\",\n      \"quantity\": 1512,\n      \"unitPrice\": 8780.60554198631,\n      \"extendedPrice\": 8361.93321950785,\n      \"status\": \"string\"\n    }\n  ],\n  \"totalAmount\": 6642.465767154679,\n  \"currency\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18d4f2c1-14e9-40ce-aed6-0757dae08d0a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "detail",
+                    ":customerNumber",
+                    ":salesOrderNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesOrderNumber",
+                      "description": "(Required) ScanSource sales order number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "117edda2-1b95-41e2-95fb-183a371fcce2",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "detail",
+                    ":customerNumber",
+                    ":salesOrderNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerNumber",
+                      "description": "(Required) Customer account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesOrderNumber",
+                      "description": "(Required) ScanSource sales order number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "940e63ec-599e-46ef-b3c4-32f62348b902",
+          "name": "Cancel Sales Order",
+          "request": {
+            "name": "Cancel Sales Order",
+            "description": {
+              "content": "Cancel a pending sales order. Orders that have already shipped cannot be cancelled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "salesorder",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"salesOrderNumber\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5b654227-798a-4ece-ab1f-8df6df7a0a05",
+              "name": "Order successfully cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"salesOrderNumber\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce5689b9-f5b4-407c-97ef-d9dade73b3cc",
+              "name": "Cannot cancel - order already shipped or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"salesOrderNumber\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "33d81fc7-b4ed-4754-811f-76abade1f99a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"salesOrderNumber\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9906ae52-1a7a-49df-989a-12cff847aa07",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "salesorder",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"salesOrderNumber\": \"<string>\",\n  \"customerNumber\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.scansource.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8aa26d7b-b9e1-405f-86f2-b7fb3e8a13c8",
+    "name": "ScanSource Invoice Availability Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.\n\nContact Support:\n Name: ScanSource Partner Support\n Email: B2BRequest@scansource.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ScanSource Invoice Availability Invoices API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Invoice Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/invoice/summary/:customerNumber",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "path",
+                "description": "Customer account number"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "salesOrderNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by ScanSource sales order number"
+              },
+              {
+                "name": "invoiceNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific invoice number"
+              },
+              {
+                "name": "poNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter by customer purchase order number"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date filter (ISO 8601 date)"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "End date filter (ISO 8601 date)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated summary view of invoices for a customer account, with filtering options by date range, order numbers, and invoice numbers."
+        },
+        {
+          "info": {
+            "name": "List Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/invoice/list/:customerNumber",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "path",
+                "description": "Customer account number"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "salesOrderNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "invoiceNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "poNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a detailed list of invoices for a customer with extended invoice information including line items and amounts."
+        },
+        {
+          "info": {
+            "name": "Get Invoice Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/invoice/detail/:customerNumber/:invoiceNumber",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "path",
+                "description": "Customer account number"
+              },
+              {
+                "name": "invoiceNumber",
+                "value": "",
+                "type": "path",
+                "description": "Invoice number to retrieve"
+              },
+              {
+                "name": "excludeSerialTracking",
+                "value": "",
+                "type": "query",
+                "description": "Exclude serial number tracking data from response"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve comprehensive details for a specific invoice including all line items, pricing, tax information, and shipping details."
+        },
+        {
+          "info": {
+            "name": "Get Invoice PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.scansource.com/api/invoice/pdf/:customerNumber/:invoiceNumber",
+            "params": [
+              {
+                "name": "customerNumber",
+                "value": "",
+                "type": "path",
+                "description": "Customer account number"
+              },
+              {
+                "name": "invoiceNumber",
+                "value": "",
+                "type": "path",
+                "description": "Invoice number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Download a PDF copy of a specific invoice for record keeping or sharing with customers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
