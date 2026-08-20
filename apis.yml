@@ -21,6 +21,16 @@ bapiId: scansource
 tags:
   - ScanSource
   - Distribution
+  - Barcodes
+  - Point-of-Sale
+  - AIDC
+  - Inventory
+  - Order Management
+  - E-Commerce
+  - Fortune 1000
+tags_raw:
+  - ScanSource
+  - Distribution
   - Barcode
   - Point Of Sale
   - AIDC
@@ -69,6 +79,8 @@ apis:
   humanURL: https://services.scansource.com/api/Help
   baseURL: https://services.scansource.com/api
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -101,6 +113,8 @@ apis:
   humanURL: https://services.scansource.com/api/Help
   baseURL: https://services.scansource.com/api
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
