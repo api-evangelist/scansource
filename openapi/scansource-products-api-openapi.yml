@@ -1,12 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ScanSource Invoice Availability Products API
-  description: The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.
+  title: ScanSource Product Products API
+  description: The ScanSource Product API provides real-time product information, pricing, and availability for technology distribution partners. Supports single and batch item queries for inventory checks, pricing lookups, and product search.
   version: 1.0.0
   contact:
     name: ScanSource Partner Support
     email: B2BRequest@scansource.com
     url: https://partnerportal.scansource.com
+  x-logo:
+    url: https://www.scansource.com/logo.png
 servers:
 - url: https://services.scansource.com/api
   description: ScanSource Production API
@@ -161,6 +163,27 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
+    ProductSummary:
+      type: object
+      properties:
+        itemNumber:
+          type: string
+          description: ScanSource item number
+        manufacturerPartNumber:
+          type: string
+          description: Manufacturer part number
+        manufacturer:
+          type: string
+          description: Manufacturer name
+        description:
+          type: string
+          description: Product description
+        categoryPath:
+          type: string
+          description: Product category path
+        isObsolete:
+          type: boolean
+          description: Whether the product is discontinued
     ProductSearchResponse:
       type: object
       properties:
@@ -218,30 +241,9 @@ components:
         isObsolete:
           type: boolean
           description: Whether the product has been discontinued
-    ProductSummary:
-      type: object
-      properties:
-        itemNumber:
-          type: string
-          description: ScanSource item number
-        manufacturerPartNumber:
-          type: string
-          description: Manufacturer part number
-        manufacturer:
-          type: string
-          description: Manufacturer name
-        description:
-          type: string
-          description: Product description
-        categoryPath:
-          type: string
-          description: Product category path
-        isObsolete:
-          type: boolean
-          description: Whether the product is discontinued
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: Ocp-Apim-Subscription-Key
-      description: Azure API Management subscription key from ScanSource partner portal
+      description: Azure API Management subscription key obtained from the ScanSource partner portal

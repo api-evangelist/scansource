@@ -1,12 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ScanSource Invoice Availability Pricing API
-  description: The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.
+  title: ScanSource Product Pricing API
+  description: The ScanSource Product API provides real-time product information, pricing, and availability for technology distribution partners. Supports single and batch item queries for inventory checks, pricing lookups, and product search.
   version: 1.0.0
   contact:
     name: ScanSource Partner Support
     email: B2BRequest@scansource.com
     url: https://partnerportal.scansource.com
+  x-logo:
+    url: https://www.scansource.com/logo.png
 servers:
 - url: https://services.scansource.com/api
   description: ScanSource Production API
@@ -109,4 +111,4 @@ components:
       type: apiKey
       in: header
       name: Ocp-Apim-Subscription-Key
-      description: Azure API Management subscription key from ScanSource partner portal
+      description: Azure API Management subscription key obtained from the ScanSource partner portal

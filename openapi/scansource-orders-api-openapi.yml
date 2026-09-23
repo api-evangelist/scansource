@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ScanSource Invoice Availability Orders API
-  description: The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.
+  title: ScanSource Sales Order Orders API
+  description: The ScanSource Sales Order API enables technology distribution partners to create, track, and manage purchase orders programmatically. Supports synchronous and asynchronous order creation, order status queries, shipping quotes, VRD operations, order cancellation, and serial number tracking.
   version: 1.0.0
   contact:
     name: ScanSource Partner Support
@@ -313,6 +313,15 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
+    OrderListResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetail'
     SalesOrderRequest:
       type: object
       required:
@@ -360,6 +369,36 @@ components:
                 type: number
               customerItemNumber:
                 type: string
+    SalesOrderResponse:
+      type: object
+      properties:
+        salesOrderNumber:
+          type: string
+          description: ScanSource assigned sales order number
+        poNumber:
+          type: string
+          description: Customer purchase order number
+        status:
+          type: string
+          description: Order status
+        orderDate:
+          type: string
+          format: date-time
+        lineItems:
+          type: array
+          items:
+            type: object
+            properties:
+              lineNumber:
+                type: integer
+              itemNumber:
+                type: string
+              quantity:
+                type: integer
+              unitPrice:
+                type: number
+              status:
+                type: string
     OrderDetail:
       type: object
       properties:
@@ -401,17 +440,6 @@ components:
           type: number
         currency:
           type: string
-    AsyncOrderResponse:
-      type: object
-      properties:
-        referenceId:
-          type: string
-          description: Reference ID for tracking the async order
-        status:
-          type: string
-          description: Initial processing status
-        message:
-          type: string
     OrderSummaryResponse:
       type: object
       properties:
@@ -437,45 +465,17 @@ components:
                 type: string
               totalAmount:
                 type: number
-    OrderListResponse:
+    AsyncOrderResponse:
       type: object
       properties:
-        totalCount:
-          type: integer
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDetail'
-    SalesOrderResponse:
-      type: object
-      properties:
-        salesOrderNumber:
+        referenceId:
           type: string
-          description: ScanSource assigned sales order number
-        poNumber:
-          type: string
-          description: Customer purchase order number
+          description: Reference ID for tracking the async order
         status:
           type: string
-          description: Order status
-        orderDate:
+          description: Initial processing status
+        message:
           type: string
-          format: date-time
-        lineItems:
-          type: array
-          items:
-            type: object
-            properties:
-              lineNumber:
-                type: integer
-              itemNumber:
-                type: string
-              quantity:
-                type: integer
-              unitPrice:
-                type: number
-              status:
-                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -1,7 +1,9 @@
 ---
 title: ScanSource Q3 Earnings Call Highlights
 url: https://www.theglobeandmail.com/investing/markets/stocks/SCSC/pressreleases/1832981/scansource-q3-earnings-call-highlights/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"ScanSource" press release artificial intelligence'
 position: 4
 source: serpapi-google

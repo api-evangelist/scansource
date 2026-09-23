@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ScanSource Invoice Availability Tracking API
-  description: The ScanSource Invoice API provides programmatic access to invoicing data for technology distribution partners. Includes invoice summaries, detailed invoice lists, individual invoice details, and PDF export capabilities with filtering by date range and order identifiers.
+  title: ScanSource Sales Order Tracking API
+  description: The ScanSource Sales Order API enables technology distribution partners to create, track, and manage purchase orders programmatically. Supports synchronous and asynchronous order creation, order status queries, shipping quotes, VRD operations, order cancellation, and serial number tracking.
   version: 1.0.0
   contact:
     name: ScanSource Partner Support

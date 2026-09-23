@@ -1,26 +1,36 @@
 {
   "provider": "scansource",
   "sources": [
-    "scansource-availability-api-openapi.yml",
-    "scansource-invoices-api-openapi.yml",
-    "scansource-orders-api-openapi.yml",
-    "scansource-pricing-api-openapi.yml",
-    "scansource-products-api-openapi.yml",
-    "scansource-shipping-api-openapi.yml",
-    "scansource-tracking-api-openapi.yml"
+    "_original/scansource-invoice-openapi.yml",
+    "_original/scansource-product-openapi.yml",
+    "_original/scansource-sales-order-openapi.yml"
   ],
   "outputs": [
-    "scansource-availability-api-openapi.yml",
     "scansource-invoices-api-openapi.yml",
-    "scansource-orders-api-openapi.yml",
+    "scansource-availability-api-openapi.yml",
     "scansource-pricing-api-openapi.yml",
     "scansource-products-api-openapi.yml",
+    "scansource-orders-api-openapi.yml",
     "scansource-shipping-api-openapi.yml",
     "scansource-tracking-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "scansource-invoice-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "scansource-product-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "scansource-sales-order-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "scansource-availability-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scansource-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scansource-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scansource-pricing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scansource-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scansource-shipping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scansource-tracking-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
