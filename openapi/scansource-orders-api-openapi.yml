@@ -313,6 +313,77 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
+    OrderDetail:
+      type: object
+      properties:
+        salesOrderNumber:
+          type: string
+        poNumber:
+          type: string
+        customerNumber:
+          type: string
+        orderDate:
+          type: string
+          format: date-time
+        status:
+          type: string
+        shipToAddress:
+          type: object
+        lineItems:
+          type: array
+          items:
+            type: object
+            properties:
+              lineNumber:
+                type: integer
+              itemNumber:
+                type: string
+              manufacturerPartNumber:
+                type: string
+              description:
+                type: string
+              quantity:
+                type: integer
+              unitPrice:
+                type: number
+              extendedPrice:
+                type: number
+              status:
+                type: string
+        totalAmount:
+          type: number
+        currency:
+          type: string
+    SalesOrderResponse:
+      type: object
+      properties:
+        salesOrderNumber:
+          type: string
+          description: ScanSource assigned sales order number
+        poNumber:
+          type: string
+          description: Customer purchase order number
+        status:
+          type: string
+          description: Order status
+        orderDate:
+          type: string
+          format: date-time
+        lineItems:
+          type: array
+          items:
+            type: object
+            properties:
+              lineNumber:
+                type: integer
+              itemNumber:
+                type: string
+              quantity:
+                type: integer
+              unitPrice:
+                type: number
+              status:
+                type: string
     OrderListResponse:
       type: object
       properties:
@@ -322,6 +393,42 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderDetail'
+    AsyncOrderResponse:
+      type: object
+      properties:
+        referenceId:
+          type: string
+          description: Reference ID for tracking the async order
+        status:
+          type: string
+          description: Initial processing status
+        message:
+          type: string
+    OrderSummaryResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        orders:
+          type: array
+          items:
+            type: object
+            properties:
+              salesOrderNumber:
+                type: string
+              poNumber:
+                type: string
+              orderDate:
+                type: string
+                format: date-time
+              status:
+                type: string
+              totalAmount:
+                type: number
     SalesOrderRequest:
       type: object
       required:
@@ -369,113 +476,6 @@ components:
                 type: number
               customerItemNumber:
                 type: string
-    SalesOrderResponse:
-      type: object
-      properties:
-        salesOrderNumber:
-          type: string
-          description: ScanSource assigned sales order number
-        poNumber:
-          type: string
-          description: Customer purchase order number
-        status:
-          type: string
-          description: Order status
-        orderDate:
-          type: string
-          format: date-time
-        lineItems:
-          type: array
-          items:
-            type: object
-            properties:
-              lineNumber:
-                type: integer
-              itemNumber:
-                type: string
-              quantity:
-                type: integer
-              unitPrice:
-                type: number
-              status:
-                type: string
-    OrderDetail:
-      type: object
-      properties:
-        salesOrderNumber:
-          type: string
-        poNumber:
-          type: string
-        customerNumber:
-          type: string
-        orderDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-        shipToAddress:
-          type: object
-        lineItems:
-          type: array
-          items:
-            type: object
-            properties:
-              lineNumber:
-                type: integer
-              itemNumber:
-                type: string
-              manufacturerPartNumber:
-                type: string
-              description:
-                type: string
-              quantity:
-                type: integer
-              unitPrice:
-                type: number
-              extendedPrice:
-                type: number
-              status:
-                type: string
-        totalAmount:
-          type: number
-        currency:
-          type: string
-    OrderSummaryResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-        page:
-          type: integer
-        pageSize:
-          type: integer
-        orders:
-          type: array
-          items:
-            type: object
-            properties:
-              salesOrderNumber:
-                type: string
-              poNumber:
-                type: string
-              orderDate:
-                type: string
-                format: date-time
-              status:
-                type: string
-              totalAmount:
-                type: number
-    AsyncOrderResponse:
-      type: object
-      properties:
-        referenceId:
-          type: string
-          description: Reference ID for tracking the async order
-        status:
-          type: string
-          description: Initial processing status
-        message:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

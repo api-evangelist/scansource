@@ -51,32 +51,6 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
-    PricingResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              itemNumber:
-                type: string
-              manufacturerPartNumber:
-                type: string
-              unitPrice:
-                type: number
-                format: float
-              currency:
-                type: string
-              priceBreaks:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    quantity:
-                      type: integer
-                    price:
-                      type: number
     PricingRequest:
       type: object
       required:
@@ -106,6 +80,32 @@ components:
         businessUnit:
           type: string
           description: Business unit for pricing context
+    PricingResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              itemNumber:
+                type: string
+              manufacturerPartNumber:
+                type: string
+              unitPrice:
+                type: number
+                format: float
+              currency:
+                type: string
+              priceBreaks:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    quantity:
+                      type: integer
+                    price:
+                      type: number
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

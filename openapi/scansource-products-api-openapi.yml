@@ -163,27 +163,6 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
-    ProductSummary:
-      type: object
-      properties:
-        itemNumber:
-          type: string
-          description: ScanSource item number
-        manufacturerPartNumber:
-          type: string
-          description: Manufacturer part number
-        manufacturer:
-          type: string
-          description: Manufacturer name
-        description:
-          type: string
-          description: Product description
-        categoryPath:
-          type: string
-          description: Product category path
-        isObsolete:
-          type: boolean
-          description: Whether the product is discontinued
     ProductSearchResponse:
       type: object
       properties:
@@ -241,6 +220,27 @@ components:
         isObsolete:
           type: boolean
           description: Whether the product has been discontinued
+    ProductSummary:
+      type: object
+      properties:
+        itemNumber:
+          type: string
+          description: ScanSource item number
+        manufacturerPartNumber:
+          type: string
+          description: Manufacturer part number
+        manufacturer:
+          type: string
+          description: Manufacturer name
+        description:
+          type: string
+          description: Product description
+        categoryPath:
+          type: string
+          description: Product category path
+        isObsolete:
+          type: boolean
+          description: Whether the product is discontinued
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
