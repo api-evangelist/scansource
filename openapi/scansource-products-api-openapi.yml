@@ -163,22 +163,6 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
-    ProductSearchResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          description: Total number of matching products
-        page:
-          type: integer
-          description: Current page number
-        pageSize:
-          type: integer
-          description: Number of results per page
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductSummary'
     ProductDetail:
       type: object
       properties:
@@ -220,6 +204,22 @@ components:
         isObsolete:
           type: boolean
           description: Whether the product has been discontinued
+    ProductSearchResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total number of matching products
+        page:
+          type: integer
+          description: Current page number
+        pageSize:
+          type: integer
+          description: Number of results per page
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSummary'
     ProductSummary:
       type: object
       properties:

@@ -313,6 +313,31 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
+    OrderSummaryResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        orders:
+          type: array
+          items:
+            type: object
+            properties:
+              salesOrderNumber:
+                type: string
+              poNumber:
+                type: string
+              orderDate:
+                type: string
+                format: date-time
+              status:
+                type: string
+              totalAmount:
+                type: number
     OrderDetail:
       type: object
       properties:
@@ -384,15 +409,6 @@ components:
                 type: number
               status:
                 type: string
-    OrderListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDetail'
     AsyncOrderResponse:
       type: object
       properties:
@@ -404,31 +420,15 @@ components:
           description: Initial processing status
         message:
           type: string
-    OrderSummaryResponse:
+    OrderListResponse:
       type: object
       properties:
         totalCount:
           type: integer
-        page:
-          type: integer
-        pageSize:
-          type: integer
         orders:
           type: array
           items:
-            type: object
-            properties:
-              salesOrderNumber:
-                type: string
-              poNumber:
-                type: string
-              orderDate:
-                type: string
-                format: date-time
-              status:
-                type: string
-              totalAmount:
-                type: number
+            $ref: '#/components/schemas/OrderDetail'
     SalesOrderRequest:
       type: object
       required:
