@@ -84,22 +84,6 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
-    SerialNumberResponse:
-      type: object
-      properties:
-        orderNumber:
-          type: string
-        serials:
-          type: array
-          items:
-            type: object
-            properties:
-              itemNumber:
-                type: string
-              serialNumber:
-                type: string
-              lineNumber:
-                type: integer
     TrackingResponse:
       type: object
       properties:
@@ -131,6 +115,22 @@ components:
                       type: string
                     description:
                       type: string
+    SerialNumberResponse:
+      type: object
+      properties:
+        orderNumber:
+          type: string
+        serials:
+          type: array
+          items:
+            type: object
+            properties:
+              itemNumber:
+                type: string
+              serialNumber:
+                type: string
+              lineNumber:
+                type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

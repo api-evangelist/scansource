@@ -51,6 +51,28 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
+    AvailabilityResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              itemNumber:
+                type: string
+              manufacturerPartNumber:
+                type: string
+              quantityAvailable:
+                type: integer
+                description: Quantity currently in stock
+              warehouse:
+                type: string
+                description: Warehouse with available stock
+              estimatedShipDate:
+                type: string
+                format: date
+                description: Estimated shipping date if not immediately available
     AvailabilityRequest:
       type: object
       required:
@@ -80,28 +102,6 @@ components:
         businessUnit:
           type: string
           description: Business unit code
-    AvailabilityResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              itemNumber:
-                type: string
-              manufacturerPartNumber:
-                type: string
-              quantityAvailable:
-                type: integer
-                description: Quantity currently in stock
-              warehouse:
-                type: string
-                description: Warehouse with available stock
-              estimatedShipDate:
-                type: string
-                format: date
-                description: Estimated shipping date if not immediately available
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

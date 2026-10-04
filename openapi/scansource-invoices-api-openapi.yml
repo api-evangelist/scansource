@@ -255,6 +255,15 @@ components:
                 type: string
               status:
                 type: string
+    InvoiceListResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceDetail'
     InvoiceDetail:
       type: object
       properties:
@@ -339,15 +348,6 @@ components:
         currency:
           type: string
           default: USD
-    InvoiceListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceDetail'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

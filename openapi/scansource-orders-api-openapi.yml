@@ -338,6 +338,73 @@ components:
                 type: string
               totalAmount:
                 type: number
+    AsyncOrderResponse:
+      type: object
+      properties:
+        referenceId:
+          type: string
+          description: Reference ID for tracking the async order
+        status:
+          type: string
+          description: Initial processing status
+        message:
+          type: string
+    OrderListResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetail'
+    SalesOrderRequest:
+      type: object
+      required:
+      - poNumber
+      - lineItems
+      properties:
+        poNumber:
+          type: string
+          description: Customer purchase order number
+        shipToAddress:
+          type: object
+          properties:
+            name:
+              type: string
+            address1:
+              type: string
+            address2:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
+        shippingMethod:
+          type: string
+          description: Preferred shipping carrier/method code
+        lineItems:
+          type: array
+          items:
+            type: object
+            required:
+            - itemNumber
+            - quantity
+            properties:
+              itemNumber:
+                type: string
+              partNumberType:
+                type: string
+              quantity:
+                type: integer
+              unitPrice:
+                type: number
+              customerItemNumber:
+                type: string
     OrderDetail:
       type: object
       properties:
@@ -408,73 +475,6 @@ components:
               unitPrice:
                 type: number
               status:
-                type: string
-    AsyncOrderResponse:
-      type: object
-      properties:
-        referenceId:
-          type: string
-          description: Reference ID for tracking the async order
-        status:
-          type: string
-          description: Initial processing status
-        message:
-          type: string
-    OrderListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderDetail'
-    SalesOrderRequest:
-      type: object
-      required:
-      - poNumber
-      - lineItems
-      properties:
-        poNumber:
-          type: string
-          description: Customer purchase order number
-        shipToAddress:
-          type: object
-          properties:
-            name:
-              type: string
-            address1:
-              type: string
-            address2:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            postalCode:
-              type: string
-            country:
-              type: string
-        shippingMethod:
-          type: string
-          description: Preferred shipping carrier/method code
-        lineItems:
-          type: array
-          items:
-            type: object
-            required:
-            - itemNumber
-            - quantity
-            properties:
-              itemNumber:
-                type: string
-              partNumberType:
-                type: string
-              quantity:
-                type: integer
-              unitPrice:
-                type: number
-              customerItemNumber:
                 type: string
   securitySchemes:
     ApiKeyAuth:
