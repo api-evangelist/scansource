@@ -50,7 +50,7 @@ tags_raw:
   - E-Commerce
   - Fortune 1000
 created: '2026-05-02'
-modified: '2026-05-02'
+modified: '2026-10-06'
 apis:
 - aid: scansource:scansource-availability-api
   name: ScanSource Availability API
@@ -169,6 +169,8 @@ apis:
   - type: JSONSchema
     url: json-schema/scansource-order-schema.json
 common:
+  - url: https://www.scansource.com/blogs
+    type: Blog
   - type: AgenticAccess
     url: agentic-access/scansource-agentic-access.yml
   - type: DomainSecurity
