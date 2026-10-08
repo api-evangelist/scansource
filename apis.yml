@@ -169,6 +169,12 @@ apis:
   - type: JSONSchema
     url: json-schema/scansource-order-schema.json
 common:
+  - type: Plans
+    url: plans/scansource-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/scansource-rate-limits.yml
+  - type: FinOps
+    url: finops/scansource-finops.yml
   - url: https://www.scansource.com/blogs
     type: Blog
   - type: AgenticAccess
