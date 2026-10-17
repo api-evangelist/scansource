@@ -225,6 +225,15 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
+    InvoiceListResponse:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceDetail'
     InvoiceSummaryResponse:
       type: object
       properties:
@@ -255,15 +264,6 @@ components:
                 type: string
               status:
                 type: string
-    InvoiceListResponse:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceDetail'
     InvoiceDetail:
       type: object
       properties:

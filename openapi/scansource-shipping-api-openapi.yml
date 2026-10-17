@@ -42,24 +42,6 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
-    ShipQuoteResponse:
-      type: object
-      properties:
-        quotes:
-          type: array
-          items:
-            type: object
-            properties:
-              carrier:
-                type: string
-              service:
-                type: string
-              estimatedDays:
-                type: integer
-              cost:
-                type: number
-              currency:
-                type: string
     ShipQuoteRequest:
       type: object
       properties:
@@ -81,6 +63,24 @@ components:
                 type: string
               quantity:
                 type: integer
+    ShipQuoteResponse:
+      type: object
+      properties:
+        quotes:
+          type: array
+          items:
+            type: object
+            properties:
+              carrier:
+                type: string
+              service:
+                type: string
+              estimatedDays:
+                type: integer
+              cost:
+                type: number
+              currency:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
